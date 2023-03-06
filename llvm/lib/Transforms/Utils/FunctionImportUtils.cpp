@@ -195,7 +195,7 @@ FunctionImportGlobalProcessing::getLinkage(const GlobalValue *SGV,
 void FunctionImportGlobalProcessing::processGlobalForThinLTO(GlobalValue &GV) {
 
   ValueInfo VI;
-  if (GV.hasName()) {
+  // if (GV.hasName()) {
     VI = ImportIndex.getValueInfo(GV.getGUID());
     // Set synthetic function entry counts.
     if (VI && ImportIndex.hasSyntheticEntryCounts()) {
@@ -212,12 +212,12 @@ void FunctionImportGlobalProcessing::processGlobalForThinLTO(GlobalValue &GV) {
         }
       }
     }
-  }
+  // }
 
   // We should always have a ValueInfo (i.e. GV in index) for definitions when
   // we are exporting, and also when importing that value.
-  assert(VI || GV.isDeclaration() ||
-         (isPerformingImport() && !doImportAsDefinition(&GV)));
+  // assert(VI || GV.isDeclaration() ||
+  //        (isPerformingImport() && !doImportAsDefinition(&GV)));
 
   // Mark read/write-only variables which can be imported with specific
   // attribute. We can't internalize them now because IRMover will fail

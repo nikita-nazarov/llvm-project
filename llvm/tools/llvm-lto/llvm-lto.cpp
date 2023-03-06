@@ -47,6 +47,7 @@
 #include "llvm/Support/ToolOutputFile.h"
 #include "llvm/Support/raw_ostream.h"
 #include "llvm/Target/TargetOptions.h"
+#include "llvm/Transforms/IPO/WholeProgramDevirt.h"
 #include <algorithm>
 #include <cassert>
 #include <cstdint>
@@ -546,6 +547,36 @@ static void writeModuleToFile(Module &TheModule, StringRef Filename) {
   WriteBitcodeToFile(TheModule, OS, /* ShouldPreserveUseListOrder */ true);
 }
 
+struct IsExported {
+  const StringMap<FunctionImporter::ExportSetTy> &ExportLists;
+  const DenseSet<GlobalValue::GUID> &GUIDPreservedSymbols;
+
+  IsExported(const StringMap<FunctionImporter::ExportSetTy> &ExportLists,
+             const DenseSet<GlobalValue::GUID> &GUIDPreservedSymbols)
+      : ExportLists(ExportLists), GUIDPreservedSymbols(GUIDPreservedSymbols) {}
+
+  bool operator()(StringRef ModuleIdentifier, ValueInfo VI) const {
+    const auto &ExportList = ExportLists.find(ModuleIdentifier);
+    return (ExportList != ExportLists.end() && ExportList->second.count(VI)) ||
+           GUIDPreservedSymbols.count(VI.getGUID());
+  }
+};
+
+struct IsPrevailing {
+  const DenseMap<GlobalValue::GUID, const GlobalValueSummary *> &PrevailingCopy;
+  IsPrevailing(const DenseMap<GlobalValue::GUID, const GlobalValueSummary *>
+                   &PrevailingCopy)
+      : PrevailingCopy(PrevailingCopy) {}
+
+  bool operator()(GlobalValue::GUID GUID, const GlobalValueSummary *S) const {
+    const auto &Prevailing = PrevailingCopy.find(GUID);
+    // Not in map means that there was only one copy, which must be prevailing.
+    if (Prevailing == PrevailingCopy.end())
+      return true;
+    return Prevailing->second == S;
+  };
+};
+
 class ThinLTOProcessing {
 public:
   ThinLTOCodeGenerator ThinGenerator;
@@ -589,6 +620,67 @@ public:
   }
 
 private:
+  static void
+  addUsedSymbolToPreservedGUID(const lto::InputFile &File,
+                              DenseSet<GlobalValue::GUID> &PreservedGUID) {
+    for (const auto &Sym : File.symbols()) {
+      if (Sym.isUsed())
+        PreservedGUID.insert(GlobalValue::getGUID(Sym.getIRName()));
+    }
+  }
+
+  // Convert the PreservedSymbols map from "Name" based to "GUID" based.
+  static void computeGUIDPreservedSymbols(const lto::InputFile &File,
+                                          const StringSet<> &PreservedSymbols,
+                                          const Triple &TheTriple,
+                                          DenseSet<GlobalValue::GUID> &GUIDs) {
+    // Iterate the symbols in the input file and if the input has preserved symbol
+    // compute the GUID for the symbol.
+    for (const auto &Sym : File.symbols()) {
+      if (PreservedSymbols.count(Sym.getName()) && !Sym.getIRName().empty())
+        GUIDs.insert(GlobalValue::getGUID(GlobalValue::getGlobalIdentifier(
+            Sym.getIRName(), GlobalValue::ExternalLinkage, "")));
+    }
+  }
+
+  static const GlobalValueSummary *
+  getFirstDefinitionForLinker(const GlobalValueSummaryList &GVSummaryList) {
+    // If there is any strong definition anywhere, get it.
+    auto StrongDefForLinker = llvm::find_if(
+        GVSummaryList, [](const std::unique_ptr<GlobalValueSummary> &Summary) {
+          auto Linkage = Summary->linkage();
+          return !GlobalValue::isAvailableExternallyLinkage(Linkage) &&
+                !GlobalValue::isWeakForLinker(Linkage);
+        });
+    if (StrongDefForLinker != GVSummaryList.end())
+      return StrongDefForLinker->get();
+    // Get the first *linker visible* definition for this global in the summary
+    // list.
+    auto FirstDefForLinker = llvm::find_if(
+        GVSummaryList, [](const std::unique_ptr<GlobalValueSummary> &Summary) {
+          auto Linkage = Summary->linkage();
+          return !GlobalValue::isAvailableExternallyLinkage(Linkage);
+        });
+    // Extern templates can be emitted as available_externally.
+    if (FirstDefForLinker == GVSummaryList.end())
+      return nullptr;
+    return FirstDefForLinker->get();
+  }
+
+  static void computePrevailingCopies(
+      const ModuleSummaryIndex &Index,
+      DenseMap<GlobalValue::GUID, const GlobalValueSummary *> &PrevailingCopy) {
+    auto HasMultipleCopies = [&](const GlobalValueSummaryList &GVSummaryList) {
+      return GVSummaryList.size() > 1;
+    };
+
+    for (auto &I : Index) {
+      if (HasMultipleCopies(I.second.SummaryList))
+        PrevailingCopy[I.first] =
+            getFirstDefinitionForLinker(I.second.SummaryList);
+    }
+  }
+
   /// Load the input files, create the combined index, and write it out.
   void thinLink() {
     // Perform "ThinLink": just produce the index
@@ -610,6 +702,48 @@ private:
     auto CombinedIndex = ThinGenerator.linkCombinedIndex();
     if (!CombinedIndex)
       report_fatal_error("ThinLink didn't create an index");
+
+    // if (hasWholeProgramVisibility(/* WholeProgramVisibilityEnabledInLTO */ false))
+    //   CombinedIndex->setWithWholeProgramVisibility();
+    // updateVCallVisibilityInIndex(*CombinedIndex,
+    //                             /* WholeProgramVisibilityEnabledInLTO */ false,
+    //                             // FIXME: This needs linker information via a
+    //                             // TBD new interface.
+    //                             /* DynamicExportSymbols */ {});
+
+    // auto ModuleCount = ThinGenerator.Modules.size();
+    // StringMap<GVSummaryMapTy> ModuleToDefinedGVSummaries(ModuleCount);
+    // CombinedIndex->collectDefinedGVSummariesPerModule(ModuleToDefinedGVSummaries);
+
+    // StringMap<FunctionImporter::ImportMapTy> ImportLists(ModuleCount);
+    // StringMap<FunctionImporter::ExportSetTy> ExportLists(ModuleCount);
+    // ComputeCrossModuleImport(*CombinedIndex, ModuleToDefinedGVSummaries, ImportLists, ExportLists);
+
+    // DenseMap<GlobalValue::GUID, const GlobalValueSummary *> PrevailingCopy;
+    // computePrevailingCopies(*CombinedIndex, PrevailingCopy);
+
+    // DenseSet<GlobalValue::GUID> GUIDPreservedSymbols;
+    // for (const auto &M : ThinGenerator.Modules)
+    //   computeGUIDPreservedSymbols(*M, ThinGenerator.PreservedSymbols, ThinGenerator.TMBuilder.TheTriple,
+    //                               GUIDPreservedSymbols);
+
+    // // Add used symbol from inputs to the preserved symbols.
+    // for (const auto &M : ThinGenerator.Modules)
+    //   addUsedSymbolToPreservedGUID(*M, GUIDPreservedSymbols);
+
+    // std::map<ValueInfo, std::vector<VTableSlotSummary>> LocalWPDTargetsMap;
+    // std::set<GlobalValue::GUID> ExportedGUIDs;
+    // runWholeProgramDevirtOnIndex(*CombinedIndex, ExportedGUIDs, LocalWPDTargetsMap);
+    // for (auto GUID : ExportedGUIDs)
+    //   GUIDPreservedSymbols.insert(GUID);
+
+    // updateIndexWPDForExports(*CombinedIndex,
+    //                     IsExported(ExportLists, GUIDPreservedSymbols),
+    //                     LocalWPDTargetsMap);
+    // thinLTOInternalizeAndPromoteInIndex(
+    //     *CombinedIndex, IsExported(ExportLists, GUIDPreservedSymbols),
+    //     IsPrevailing(PrevailingCopy));
+
     std::error_code EC;
     raw_fd_ostream OS(OutputFilename, EC, sys::fs::OpenFlags::OF_None);
     error(EC, "error opening the file '" + OutputFilename + "'");
@@ -786,13 +920,14 @@ private:
     if (!ThinLTOIndex.empty())
       errs() << "Warning: -thinlto-index ignored for optimize stage";
 
+    auto Index = loadCombinedIndex().release();
     for (auto &Filename : InputFilenames) {
       LLVMContext Ctx;
       auto Buffer = loadFile(Filename);
       auto Input = loadInputFile(Buffer->getMemBufferRef());
       auto TheModule = loadModuleFromInput(*Input, Ctx);
 
-      ThinGenerator.optimize(*TheModule);
+      ThinGenerator.optimize(*TheModule, Index);
 
       std::string OutputName = OutputFilename;
       if (OutputName.empty()) {
