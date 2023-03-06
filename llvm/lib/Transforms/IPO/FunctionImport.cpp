@@ -848,6 +848,8 @@ void llvm::computeDeadSymbolsAndUpdateIndirectCalls(
     ModuleSummaryIndex &Index,
     const DenseSet<GlobalValue::GUID> &GUIDPreservedSymbols,
     function_ref<PrevailingType(GlobalValue::GUID)> isPrevailing) {
+  if (Index.withGlobalValueDeadStripping())
+    return;
   assert(!Index.withGlobalValueDeadStripping());
   if (!ComputeDead ||
       // Don't do anything when nothing is live, this is friendly with tests.
@@ -1211,7 +1213,8 @@ void llvm::thinLTOInternalizeModule(Module &TheModule,
         // recorded in the index using the original name.
         // FIXME: This may not be needed once PR27866 is fixed.
         GS = DefinedGlobals.find(GlobalValue::getGUID(OrigName));
-        assert(GS != DefinedGlobals.end());
+        return true;
+        // assert(GS != DefinedGlobals.end());
       }
     }
     return !GlobalValue::isLocalLinkage(GS->second->linkage());

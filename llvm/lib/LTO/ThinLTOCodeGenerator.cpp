@@ -60,6 +60,8 @@
 #include "llvm/Transforms/ObjCARC.h"
 #include "llvm/Transforms/Utils/FunctionImportUtils.h"
 
+#include <chrono>
+#include <fstream>
 #include <numeric>
 
 #if !defined(_MSC_VER) && !defined(__MINGW32__)
@@ -441,6 +443,16 @@ public:
   }
 };
 
+void write_time_to_file(const std::string &FileName, int Time, const Module &TheModule) {
+    std::ofstream out;
+    out.open(FileName, std::ios_base::app);
+    auto name = TheModule.getName().str();
+    out << name.substr(name.rfind('/') + 1)
+        << " "
+        << Time
+        << std::endl;
+}
+
 static std::unique_ptr<MemoryBuffer>
 ProcessThinLTOModule(Module &TheModule, ModuleSummaryIndex &Index,
                      StringMap<lto::InputFile *> &ModuleMap, TargetMachine &TM,
@@ -468,37 +480,65 @@ ProcessThinLTOModule(Module &TheModule, ModuleSummaryIndex &Index,
       TheModule.getPIELevel() == PIELevel::Default;
 
   if (!SingleModule) {
-    promoteModule(TheModule, Index, ClearDSOLocalOnDeclarations);
+    auto start = std::chrono::high_resolution_clock::now();
+    promoteModule(TheModule, Index, /*ClearDSOLocalOnDeclarations=*/false);
 
     // Apply summary-based prevailing-symbol resolution decisions.
     thinLTOFinalizeInModule(TheModule, DefinedGlobals, /*PropagateAttrs=*/true);
 
     // Save temps: after promotion.
     saveTempBitcode(TheModule, SaveTempsDir, count, ".1.promoted.bc");
+    auto end = std::chrono::high_resolution_clock::now();
+    write_time_to_file(
+      "chart/times1/promote.txt", 
+      std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count(), 
+      TheModule
+    );
   }
 
   // Be friendly and don't nuke totally the module when the client didn't
   // supply anything to preserve.
   if (!ExportList.empty() || !GUIDPreservedSymbols.empty()) {
     // Apply summary-based internalization decisions.
+    auto start = std::chrono::high_resolution_clock::now();
     thinLTOInternalizeModule(TheModule, DefinedGlobals);
+    auto end = std::chrono::high_resolution_clock::now();
+    write_time_to_file(
+      "chart/times1/internalise.txt", 
+      std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count(), 
+      TheModule
+    );
   }
 
   // Save internalized bitcode
   saveTempBitcode(TheModule, SaveTempsDir, count, ".2.internalized.bc");
 
   if (!SingleModule) {
+    auto start = std::chrono::high_resolution_clock::now();
     crossImportIntoModule(TheModule, Index, ModuleMap, ImportList,
                           ClearDSOLocalOnDeclarations);
 
     // Save temps: after cross-module import.
     saveTempBitcode(TheModule, SaveTempsDir, count, ".3.imported.bc");
+    auto end = std::chrono::high_resolution_clock::now();
+    write_time_to_file(
+      "chart/times1/import.txt", 
+      std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count(), 
+      TheModule
+    );
   }
 
+  auto start = std::chrono::high_resolution_clock::now();
   optimizeModule(TheModule, TM, OptLevel, Freestanding, DebugPassManager,
                  &Index);
 
   saveTempBitcode(TheModule, SaveTempsDir, count, ".4.opt.bc");
+  auto end = std::chrono::high_resolution_clock::now();
+  write_time_to_file(
+    "chart/times1/optimise.txt", 
+    std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count(), 
+    TheModule
+  );
 
   if (DisableCodeGen) {
     // Configured to stop before CodeGen, serialize the bitcode and return.
@@ -903,13 +943,19 @@ void ThinLTOCodeGenerator::internalize(Module &TheModule,
   // FIXME Set ClearDSOLocalOnDeclarations.
   promoteModule(TheModule, Index, /*ClearDSOLocalOnDeclarations=*/false);
 
+  auto DefinedGlobals = ModuleToDefinedGVSummaries[ModuleIdentifier];
+
   // Internalization
   thinLTOFinalizeInModule(TheModule,
                           ModuleToDefinedGVSummaries[ModuleIdentifier],
                           /*PropagateAttrs=*/false);
 
+  // thinLTOFinalizeInModule(TheModule,
+  //                         DefinedGlobals,
+  //                         /*PropagateAttrs=*/true);
+
   thinLTOInternalizeModule(TheModule,
-                           ModuleToDefinedGVSummaries[ModuleIdentifier]);
+                           DefinedGlobals);
 }
 
 /**
@@ -921,6 +967,17 @@ void ThinLTOCodeGenerator::optimize(Module &TheModule) {
   // Optimize now
   optimizeModule(TheModule, *TMBuilder.create(), OptLevel, Freestanding,
                  DebugPassManager, nullptr);
+}
+
+void ThinLTOCodeGenerator::optimize(Module &TheModule, ModuleSummaryIndex *Index) {
+  initTMBuilder(TMBuilder, Triple(TheModule.getTargetTriple()));
+
+  if (!Index)
+    return;
+
+  // Optimize now
+  optimizeModule(TheModule, *TMBuilder.create(), OptLevel, Freestanding,
+                 DebugPassManager, Index);
 }
 
 /// Write out the generated object file, either from CacheEntryPath or from
@@ -1010,6 +1067,8 @@ void ThinLTOCodeGenerator::run() {
 
   // Sequential linking phase
   auto Index = linkCombinedIndex();
+
+  SaveTempsDir = "llvm-lto-tmp/";
 
   // Save temps: index.
   if (!SaveTempsDir.empty()) {

@@ -123,7 +123,7 @@ public:
    */
 
   struct CachingOptions {
-    std::string Path;                    // Path to the cache, empty to disable.
+    std::string Path; // Path to the cache, empty to disable.
     CachePruningPolicy Policy;
   };
 
@@ -135,7 +135,7 @@ public:
   /// negative value to disable pruning. A value of 0 will force pruning to
   /// occur.
   void setCachePruningInterval(int Interval) {
-    if(Interval < 0)
+    if (Interval < 0)
       CacheOptions.Policy.Interval.reset();
     else
       CacheOptions.Policy.Interval = std::chrono::seconds(Interval);
@@ -260,8 +260,7 @@ public:
    * Compute and emit the imported files for module at \p ModulePath.
    */
   void emitImports(Module &Module, StringRef OutputName,
-                   ModuleSummaryIndex &Index,
-                   const lto::InputFile &File);
+                   ModuleSummaryIndex &Index, const lto::InputFile &File);
 
   /**
    * Perform cross-module importing for the module identified by
@@ -288,6 +287,7 @@ public:
    * Perform post-importing ThinLTO optimizations.
    */
   void optimize(Module &Module);
+  void optimize(Module &TheModule, ModuleSummaryIndex *Index);
 
   /**
    * Write temporary object file to SavedObjectDirectoryPath, write symlink
@@ -298,7 +298,7 @@ public:
                                    const MemoryBuffer &OutputBuffer);
   /**@}*/
 
-private:
+public:
   /// Helper factory to build a TargetMachine
   TargetMachineBuilder TMBuilder;
 
@@ -331,7 +331,7 @@ private:
 
   /// Flag to enable/disable CodeGen. When set to true, the process stops after
   /// optimizations and a bitcode is produced.
-  bool DisableCodeGen = false;
+  bool DisableCodeGen = true;
 
   /// Flag to indicate that only the CodeGen will be performed, no cross-module
   /// importing or optimization.
