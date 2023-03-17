@@ -55,6 +55,9 @@
 #include <system_error>
 #include <tuple>
 #include <utility>
+#include <fstream>
+#include <iostream>
+
 
 using namespace llvm;
 
@@ -1092,16 +1095,26 @@ void llvm::thinLTOInternalizeModule(Module &TheModule,
         // recorded in the index using the original name.
         // FIXME: This may not be needed once PR27866 is fixed.
         GS = DefinedGlobals.find(GlobalValue::getGUID(OrigName));
-        return true;
+        if (GS == DefinedGlobals.end()) {
+          return true;
+        }
         // assert(GS != DefinedGlobals.end());
       }
     }
     return !GlobalValue::isLocalLinkage(GS->second->linkage());
   };
 
+  auto Wrapper = [&](const GlobalValue &GV) -> bool {
+    std::ofstream out;
+    out.open("globals.txt", std::ios_base::app);
+    bool mustPreserve = MustPreserveGV(GV);
+    out << GV.getName().str() << ' ' << mustPreserve << '\n';
+    return mustPreserve;
+  };
+
   // FIXME: See if we can just internalize directly here via linkage changes
   // based on the index, rather than invoking internalizeModule.
-  internalizeModule(TheModule, MustPreserveGV);
+  internalizeModule(TheModule, Wrapper);
 }
 
 /// Make alias a clone of its aliasee.

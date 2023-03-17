@@ -54,7 +54,8 @@ void promoteInternals(Module &ExportM, Module &ImportM, StringRef ModuleId,
       }
     }
 
-    std::string NewName = (Name + ModuleId).str();
+    // std::string NewName = (Name + ModuleId).str();
+    std::string NewName = Name.str();
 
     if (const auto *C = ExportGV.getComdat())
       if (C->getName() == Name)

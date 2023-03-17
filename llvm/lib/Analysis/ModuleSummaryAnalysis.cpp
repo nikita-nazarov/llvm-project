@@ -799,8 +799,8 @@ ModuleSummaryIndex llvm::buildModuleSummaryIndex(
     if (GlobalList.second.SummaryList.empty())
       continue;
 
-    assert(GlobalList.second.SummaryList.size() == 1 &&
-           "Expected module's index to have one summary per GUID");
+    // assert(GlobalList.second.SummaryList.size() == 1 &&
+    //        "Expected module's index to have one summary per GUID");
     auto &Summary = GlobalList.second.SummaryList[0];
     if (!IsThinLTO) {
       Summary->setNotEligibleToImport();

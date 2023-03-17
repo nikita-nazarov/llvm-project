@@ -1,0 +1,1014 @@
+cmake -S llvm -B build -G  Ninja -DLLVM_ENABLE_PROJECTS=clang -DCMAKE_BUILD_TYPE=Debug && ninja -C build/            	
+-- clang project is enabled
+-- clang-tools-extra project is disabled
+-- compiler-rt project is disabled
+-- debuginfo-tests project is disabled
+-- libc project is disabled
+-- libclc project is disabled
+-- libcxx project is disabled
+-- libcxxabi project is disabled
+-- libunwind project is disabled
+-- lld project is disabled
+-- lldb project is disabled
+-- mlir project is disabled
+-- openmp project is disabled
+-- parallel-libs project is disabled
+-- polly project is disabled
+-- pstl project is disabled
+-- flang project is disabled
+-- Found libtool - /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool
+-- Native target architecture is AArch64
+-- Threads enabled.
+-- Doxygen disabled.
+-- Go bindings disabled.
+-- Ninja version: 1.11.1
+-- Found ld64 - /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld
+-- Could NOT find OCaml (missing: OCAMLFIND OCAML_VERSION OCAML_STDLIB_PATH) 
+-- Could NOT find OCaml (missing: OCAMLFIND OCAML_VERSION OCAML_STDLIB_PATH) 
+-- OCaml bindings disabled.
+-- LLVM host triple: arm64-apple-darwin22.3.0
+-- LLVM default target triple: arm64-apple-darwin22.3.0
+-- Building with -fPIC
+-- Constructing LLVMBuild project information
+-- Targeting AArch64
+-- Targeting AMDGPU
+-- Targeting ARM
+-- Targeting AVR
+-- Targeting BPF
+-- Targeting Hexagon
+-- Targeting Lanai
+-- Targeting Mips
+-- Targeting MSP430
+-- Targeting NVPTX
+-- Targeting PowerPC
+-- Targeting RISCV
+-- Targeting Sparc
+-- Targeting SystemZ
+-- Targeting WebAssembly
+-- Targeting X86
+-- Targeting XCore
+-- Clang version: 11.1.0
+-- Registering Bye as a pass plugin (static build: OFF)
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/nikitanazarov/Projects/llvm-project/build
+ninja: Entering directory `build/'
+[1/33] Building CXX object lib/Transforms/IPO/CMakeFiles/LLVMipo.dir/ThinLTOBitcodeWriter.cpp.o
+FAILED: lib/Transforms/IPO/CMakeFiles/LLVMipo.dir/ThinLTOBitcodeWriter.cpp.o 
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DGTEST_HAS_RTTI=0 -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/Users/nikitanazarov/Projects/llvm-project/build/lib/Transforms/IPO -I/Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO -I/Library/Developer/CommandLineTools/SDKs/MacOSX13.sdk/usr/include/libxml2 -I/Users/nikitanazarov/Projects/llvm-project/build/include -I/Users/nikitanazarov/Projects/llvm-project/llvm/include -fPIC -fvisibility-inlines-hidden -Werror=date-time -Werror=unguarded-availability-new -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wmissing-field-initializers -pedantic -Wno-long-long -Wimplicit-fallthrough -Wcovered-switch-default -Wno-noexcept-type -Wnon-virtual-dtor -Wdelete-non-virtual-dtor -Wstring-conversion -fdiagnostics-color -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk  -fno-exceptions -fno-rtti -std=c++17 -MD -MT lib/Transforms/IPO/CMakeFiles/LLVMipo.dir/ThinLTOBitcodeWriter.cpp.o -MF lib/Transforms/IPO/CMakeFiles/LLVMipo.dir/ThinLTOBitcodeWriter.cpp.o.d -o lib/Transforms/IPO/CMakeFiles/LLVMipo.dir/ThinLTOBitcodeWriter.cpp.o -c /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:9:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Transforms/IPO/ThinLTOBitcodeWriter.h:19:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/PassManager.h:44:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Function.h:25:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Argument.h:19:
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Value.h:125:21: warning: 'iterator<std::forward_iterator_tag, llvm::Use *>' is deprecated [-Wdeprecated-declarations]
+      : public std::iterator<std::forward_iterator_tag, UseT *> {
+                    ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Value.h:165:28: note: in instantiation of template class 'llvm::Value::use_iterator_impl<llvm::Use>' requested here
+    use_iterator_impl<Use> UI;
+                           ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__iterator/iterator.h:27:29: note: 'iterator<std::forward_iterator_tag, llvm::Use *>' has been explicitly marked deprecated here
+struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 iterator
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1066:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1043:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:9:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Transforms/IPO/ThinLTOBitcodeWriter.h:19:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/PassManager.h:44:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Function.h:25:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Argument.h:19:
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Value.h:125:21: warning: 'iterator<std::forward_iterator_tag, const llvm::Use *>' is deprecated [-Wdeprecated-declarations]
+      : public std::iterator<std::forward_iterator_tag, UseT *> {
+                    ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Value.h:305:56: note: in instantiation of template class 'llvm::Value::use_iterator_impl<const llvm::Use>' requested here
+    for (use_iterator UI = use_begin(), E = use_end(); UI != E;) {
+                                                       ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__iterator/iterator.h:27:29: note: 'iterator<std::forward_iterator_tag, const llvm::Use *>' has been explicitly marked deprecated here
+struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 iterator
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1066:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1043:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:9:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Transforms/IPO/ThinLTOBitcodeWriter.h:19:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/PassManager.h:44:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Function.h:25:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Argument.h:19:
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Value.h:164:21: warning: 'iterator<std::forward_iterator_tag, llvm::User *>' is deprecated [-Wdeprecated-declarations]
+      : public std::iterator<std::forward_iterator_tag, UserTy *> {
+                    ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Value.h:390:17: note: in instantiation of template class 'llvm::Value::user_iterator_impl<llvm::User>' requested here
+  user_iterator materialized_user_begin() { return user_iterator(UseList); }
+                ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__iterator/iterator.h:27:29: note: 'iterator<std::forward_iterator_tag, llvm::User *>' has been explicitly marked deprecated here
+struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 iterator
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1066:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1043:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:9:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Transforms/IPO/ThinLTOBitcodeWriter.h:19:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/PassManager.h:44:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Function.h:25:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Argument.h:19:
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Value.h:164:21: warning: 'iterator<std::forward_iterator_tag, const llvm::User *>' is deprecated [-Wdeprecated-declarations]
+      : public std::iterator<std::forward_iterator_tag, UserTy *> {
+                    ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Value.h:391:23: note: in instantiation of template class 'llvm::Value::user_iterator_impl<const llvm::User>' requested here
+  const_user_iterator materialized_user_begin() const {
+                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__iterator/iterator.h:27:29: note: 'iterator<std::forward_iterator_tag, const llvm::User *>' has been explicitly marked deprecated here
+struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 iterator
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1066:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1043:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:9:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Transforms/IPO/ThinLTOBitcodeWriter.h:19:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/PassManager.h:40:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMap.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMapInfo.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/ArrayRef.h:15:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/STLExtras.h:20:
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:68:19: warning: 'iterator<std::random_access_iterator_tag, llvm::Value *, long, llvm::Value *, llvm::Value *>' is deprecated [-Wdeprecated-declarations]
+    : public std::iterator<IteratorCategoryT, T, DifferenceTypeT, PointerT,
+                  ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:206:14: note: in instantiation of template class 'llvm::iterator_facade_base<llvm::User::value_op_iterator, std::random_access_iterator_tag, llvm::Value *, long, llvm::Value *, llvm::Value *>' requested here
+    : public iterator_facade_base<DerivedT, IteratorCategoryT, T,
+             ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/User.h:251:9: note: in instantiation of template class 'llvm::iterator_adaptor_base<llvm::User::value_op_iterator, llvm::Use *, std::random_access_iterator_tag, llvm::Value *, long, llvm::Value *, llvm::Value *>' requested here
+      : iterator_adaptor_base<value_op_iterator, op_iterator,
+        ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__iterator/iterator.h:27:29: note: 'iterator<std::random_access_iterator_tag, llvm::Value *, long, llvm::Value *, llvm::Value *>' has been explicitly marked deprecated here
+struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 iterator
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1066:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1043:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:9:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Transforms/IPO/ThinLTOBitcodeWriter.h:19:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/PassManager.h:40:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMap.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMapInfo.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/ArrayRef.h:15:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/STLExtras.h:20:
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:68:19: warning: 'iterator<std::random_access_iterator_tag, const llvm::Value *, long, const llvm::Value *, const llvm::Value *>' is deprecated [-Wdeprecated-declarations]
+    : public std::iterator<IteratorCategoryT, T, DifferenceTypeT, PointerT,
+                  ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:206:14: note: in instantiation of template class 'llvm::iterator_facade_base<llvm::User::const_value_op_iterator, std::random_access_iterator_tag, const llvm::Value *, long, const llvm::Value *, const llvm::Value *>' requested here
+    : public iterator_facade_base<DerivedT, IteratorCategoryT, T,
+             ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/User.h:271:9: note: in instantiation of template class 'llvm::iterator_adaptor_base<llvm::User::const_value_op_iterator, const llvm::Use *, std::random_access_iterator_tag, const llvm::Value *, long, const llvm::Value *, const llvm::Value *>' requested here
+      : iterator_adaptor_base<const_value_op_iterator, const_op_iterator,
+        ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__iterator/iterator.h:27:29: note: 'iterator<std::random_access_iterator_tag, const llvm::Value *, long, const llvm::Value *, const llvm::Value *>' has been explicitly marked deprecated here
+struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 iterator
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1066:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1043:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:9:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Transforms/IPO/ThinLTOBitcodeWriter.h:19:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/PassManager.h:44:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Function.h:27:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/BasicBlock.h:22:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Instruction.h:22:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/DebugLoc.h:17:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/TrackingMDRef.h:16:
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Metadata.h:1344:19: warning: 'iterator<std::bidirectional_iterator_tag, llvm::MDNode>' is deprecated [-Wdeprecated-declarations]
+      public std::iterator<std::bidirectional_iterator_tag, T2> {
+                  ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Metadata.h:1414:15: note: in instantiation of template class 'llvm::NamedMDNode::op_iterator_impl<llvm::MDNode *, llvm::MDNode>' requested here
+  op_iterator op_begin() { return op_iterator(this, 0); }
+              ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__iterator/iterator.h:27:29: note: 'iterator<std::bidirectional_iterator_tag, llvm::MDNode>' has been explicitly marked deprecated here
+struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 iterator
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1066:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1043:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:9:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Transforms/IPO/ThinLTOBitcodeWriter.h:19:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/PassManager.h:44:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Function.h:27:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/BasicBlock.h:22:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Instruction.h:22:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/DebugLoc.h:17:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/TrackingMDRef.h:16:
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Metadata.h:1344:19: warning: 'iterator<std::bidirectional_iterator_tag, llvm::MDNode>' is deprecated [-Wdeprecated-declarations]
+      public std::iterator<std::bidirectional_iterator_tag, T2> {
+                  ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Metadata.h:1419:21: note: in instantiation of template class 'llvm::NamedMDNode::op_iterator_impl<const llvm::MDNode *, llvm::MDNode>' requested here
+  const_op_iterator op_begin() const { return const_op_iterator(this, 0); }
+                    ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__iterator/iterator.h:27:29: note: 'iterator<std::bidirectional_iterator_tag, llvm::MDNode>' has been explicitly marked deprecated here
+struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 iterator
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1066:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1043:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:9:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Transforms/IPO/ThinLTOBitcodeWriter.h:19:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/PassManager.h:40:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMap.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMapInfo.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/ArrayRef.h:15:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/STLExtras.h:20:
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:68:19: warning: 'iterator<std::bidirectional_iterator_tag, const llvm::Instruction>' is deprecated [-Wdeprecated-declarations]
+    : public std::iterator<IteratorCategoryT, T, DifferenceTypeT, PointerT,
+                  ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:206:14: note: in instantiation of template class 'llvm::iterator_facade_base<llvm::filter_iterator_base<llvm::ilist_iterator<llvm::ilist_detail::node_options<llvm::Instruction, false, false, void>, false, true>, std::function<bool (const llvm::Instruction &)>, std::bidirectional_iterator_tag>, std::bidirectional_iterator_tag, const llvm::Instruction>' requested here
+    : public iterator_facade_base<DerivedT, IteratorCategoryT, T,
+             ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/STLExtras.h:380:14: note: in instantiation of template class 'llvm::iterator_adaptor_base<llvm::filter_iterator_base<llvm::ilist_iterator<llvm::ilist_detail::node_options<llvm::Instruction, false, false, void>, false, true>, std::function<bool (const llvm::Instruction &)>, std::bidirectional_iterator_tag>, llvm::ilist_iterator<llvm::ilist_detail::node_options<llvm::Instruction, false, false, void>, false, true>, std::bidirectional_iterator_tag, const llvm::Instruction, long, const llvm::Instruction *, const llvm::Instruction &>' requested here
+    : public iterator_adaptor_base<
+             ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/STLExtras.h:438:14: note: in instantiation of template class 'llvm::filter_iterator_base<llvm::ilist_iterator<llvm::ilist_detail::node_options<llvm::Instruction, false, false, void>, false, true>, std::function<bool (const llvm::Instruction &)>, std::bidirectional_iterator_tag>' requested here
+    : public filter_iterator_base<WrappedIteratorT, PredicateT,
+             ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/BasicBlock.h:206:3: note: in instantiation of template class 'llvm::filter_iterator_impl<llvm::ilist_iterator<llvm::ilist_detail::node_options<llvm::Instruction, false, false, void>, false, true>, std::function<bool (const llvm::Instruction &)>, std::bidirectional_iterator_tag>' requested here
+  filter_iterator<BasicBlock::const_iterator,
+  ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__iterator/iterator.h:27:29: note: 'iterator<std::bidirectional_iterator_tag, const llvm::Instruction>' has been explicitly marked deprecated here
+struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 iterator
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1066:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1043:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:9:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Transforms/IPO/ThinLTOBitcodeWriter.h:19:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/PassManager.h:40:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMap.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMapInfo.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/ArrayRef.h:15:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/STLExtras.h:20:
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:68:19: warning: 'iterator<std::forward_iterator_tag, const llvm::PHINode>' is deprecated [-Wdeprecated-declarations]
+    : public std::iterator<IteratorCategoryT, T, DifferenceTypeT, PointerT,
+                  ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/BasicBlock.h:309:16: note: in instantiation of template class 'llvm::iterator_facade_base<llvm::BasicBlock::phi_iterator_impl<const llvm::PHINode, llvm::ilist_iterator<llvm::ilist_detail::node_options<llvm::Instruction, false, false, void>, false, true>>, std::forward_iterator_tag, const llvm::PHINode>' requested here
+      : public iterator_facade_base<phi_iterator_impl<PHINodeT, BBIteratorT>,
+               ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator_range.h:32:13: note: in instantiation of template class 'llvm::BasicBlock::phi_iterator_impl<const llvm::PHINode, llvm::ilist_iterator<llvm::ilist_detail::node_options<llvm::Instruction, false, false, void>, false, true>>' requested here
+  IteratorT begin_iterator, end_iterator;
+            ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/BasicBlock.h:345:38: note: in instantiation of template class 'llvm::iterator_range<llvm::BasicBlock::phi_iterator_impl<const llvm::PHINode, llvm::ilist_iterator<llvm::ilist_detail::node_options<llvm::Instruction, false, false, void>, false, true>>>' requested here
+  iterator_range<const_phi_iterator> phis() const {
+                                     ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__iterator/iterator.h:27:29: note: 'iterator<std::forward_iterator_tag, const llvm::PHINode>' has been explicitly marked deprecated here
+struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 iterator
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1066:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1043:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:9:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Transforms/IPO/ThinLTOBitcodeWriter.h:19:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/PassManager.h:40:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMap.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMapInfo.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/ArrayRef.h:15:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/STLExtras.h:20:
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:68:19: warning: 'iterator<std::forward_iterator_tag, llvm::PHINode>' is deprecated [-Wdeprecated-declarations]
+    : public std::iterator<IteratorCategoryT, T, DifferenceTypeT, PointerT,
+                  ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/BasicBlock.h:309:16: note: in instantiation of template class 'llvm::iterator_facade_base<llvm::BasicBlock::phi_iterator_impl<>, std::forward_iterator_tag, llvm::PHINode>' requested here
+      : public iterator_facade_base<phi_iterator_impl<PHINodeT, BBIteratorT>,
+               ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator_range.h:32:13: note: in instantiation of template class 'llvm::BasicBlock::phi_iterator_impl<>' requested here
+  IteratorT begin_iterator, end_iterator;
+            ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/BasicBlock.h:346:44: note: in instantiation of template class 'llvm::iterator_range<llvm::BasicBlock::phi_iterator_impl<>>' requested here
+    return const_cast<BasicBlock *>(this)->phis();
+                                           ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__iterator/iterator.h:27:29: note: 'iterator<std::forward_iterator_tag, llvm::PHINode>' has been explicitly marked deprecated here
+struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 iterator
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1066:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1043:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:9:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Transforms/IPO/ThinLTOBitcodeWriter.h:19:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/PassManager.h:45:
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Module.h:713:21: warning: 'iterator<std::input_iterator_tag, llvm::DICompileUnit *>' is deprecated [-Wdeprecated-declarations]
+      : public std::iterator<std::input_iterator_tag, DICompileUnit *> {
+                    ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__iterator/iterator.h:27:29: note: 'iterator<std::input_iterator_tag, llvm::DICompileUnit *>' has been explicitly marked deprecated here
+struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 iterator
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1066:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1043:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:9:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Transforms/IPO/ThinLTOBitcodeWriter.h:19:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/PassManager.h:40:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMap.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMapInfo.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/ArrayRef.h:15:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/STLExtras.h:20:
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:68:19: warning: 'iterator<std::random_access_iterator_tag, llvm::BasicBlock *, long, llvm::BasicBlock *, llvm::BasicBlock *>' is deprecated [-Wdeprecated-declarations]
+    : public std::iterator<IteratorCategoryT, T, DifferenceTypeT, PointerT,
+                  ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:206:14: note: in instantiation of template class 'llvm::iterator_facade_base<llvm::BranchInst::succ_op_iterator, std::random_access_iterator_tag, llvm::BasicBlock *, long, llvm::BasicBlock *, llvm::BasicBlock *>' requested here
+    : public iterator_facade_base<DerivedT, IteratorCategoryT, T,
+             ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Instructions.h:2993:9: note: in instantiation of template class 'llvm::iterator_adaptor_base<llvm::BranchInst::succ_op_iterator, llvm::User::value_op_iterator, std::random_access_iterator_tag, llvm::BasicBlock *, long, llvm::BasicBlock *, llvm::BasicBlock *>' requested here
+      : iterator_adaptor_base<succ_op_iterator, value_op_iterator,
+        ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__iterator/iterator.h:27:29: note: 'iterator<std::random_access_iterator_tag, llvm::BasicBlock *, long, llvm::BasicBlock *, llvm::BasicBlock *>' has been explicitly marked deprecated here
+struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 iterator
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1066:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1043:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:9:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Transforms/IPO/ThinLTOBitcodeWriter.h:19:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/PassManager.h:40:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMap.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMapInfo.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/ArrayRef.h:15:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/STLExtras.h:20:
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:68:19: warning: 'iterator<std::random_access_iterator_tag, const llvm::BasicBlock *, long, const llvm::BasicBlock *, const llvm::BasicBlock *>' is deprecated [-Wdeprecated-declarations]
+    : public std::iterator<IteratorCategoryT, T, DifferenceTypeT, PointerT,
+                  ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:206:14: note: in instantiation of template class 'llvm::iterator_facade_base<llvm::BranchInst::const_succ_op_iterator, std::random_access_iterator_tag, const llvm::BasicBlock *, long, const llvm::BasicBlock *, const llvm::BasicBlock *>' requested here
+    : public iterator_facade_base<DerivedT, IteratorCategoryT, T,
+             ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Instructions.h:3004:9: note: in instantiation of template class 'llvm::iterator_adaptor_base<llvm::BranchInst::const_succ_op_iterator, llvm::User::const_value_op_iterator, std::random_access_iterator_tag, const llvm::BasicBlock *, long, const llvm::BasicBlock *, const llvm::BasicBlock *>' requested here
+      : iterator_adaptor_base<const_succ_op_iterator, const_value_op_iterator,
+        ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__iterator/iterator.h:27:29: note: 'iterator<std::random_access_iterator_tag, const llvm::BasicBlock *, long, const llvm::BasicBlock *, const llvm::BasicBlock *>' has been explicitly marked deprecated here
+struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 iterator
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1066:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1043:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:9:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Transforms/IPO/ThinLTOBitcodeWriter.h:19:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/PassManager.h:40:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMap.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMapInfo.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/ArrayRef.h:15:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/STLExtras.h:20:
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:68:19: warning: 'iterator<std::random_access_iterator_tag, llvm::SwitchInst::CaseHandleImpl<const llvm::SwitchInst, const llvm::ConstantInt, const llvm::BasicBlock>>' is deprecated [-Wdeprecated-declarations]
+    : public std::iterator<IteratorCategoryT, T, DifferenceTypeT, PointerT,
+                  ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Instructions.h:3225:16: note: in instantiation of template class 'llvm::iterator_facade_base<llvm::SwitchInst::CaseIteratorImpl<llvm::SwitchInst::CaseHandleImpl<const llvm::SwitchInst, const llvm::ConstantInt, const llvm::BasicBlock>>, std::random_access_iterator_tag, llvm::SwitchInst::CaseHandleImpl<const llvm::SwitchInst, const llvm::ConstantInt, const llvm::BasicBlock>>' requested here
+      : public iterator_facade_base<CaseIteratorImpl<CaseHandleT>,
+               ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Instructions.h:3253:5: note: in instantiation of template class 'llvm::SwitchInst::CaseIteratorImpl<llvm::SwitchInst::CaseHandleImpl<const llvm::SwitchInst, const llvm::ConstantInt, const llvm::BasicBlock>>' requested here
+    operator CaseIteratorImpl<ConstCaseHandle>() const {
+    ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__iterator/iterator.h:27:29: note: 'iterator<std::random_access_iterator_tag, llvm::SwitchInst::CaseHandleImpl<const llvm::SwitchInst, const llvm::ConstantInt, const llvm::BasicBlock>>' has been explicitly marked deprecated here
+struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 iterator
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1066:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1043:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:9:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Transforms/IPO/ThinLTOBitcodeWriter.h:19:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/PassManager.h:40:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMap.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMapInfo.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/ArrayRef.h:15:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/STLExtras.h:20:
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:68:19: warning: 'iterator<std::random_access_iterator_tag, llvm::SwitchInst::CaseHandle>' is deprecated [-Wdeprecated-declarations]
+    : public std::iterator<IteratorCategoryT, T, DifferenceTypeT, PointerT,
+                  ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Instructions.h:3225:16: note: in instantiation of template class 'llvm::iterator_facade_base<llvm::SwitchInst::CaseIteratorImpl<llvm::SwitchInst::CaseHandle>, std::random_access_iterator_tag, llvm::SwitchInst::CaseHandle>' requested here
+      : public iterator_facade_base<CaseIteratorImpl<CaseHandleT>,
+               ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Instructions.h:3327:10: note: in instantiation of template class 'llvm::SwitchInst::CaseIteratorImpl<llvm::SwitchInst::CaseHandle>' requested here
+  CaseIt case_begin() {
+         ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__iterator/iterator.h:27:29: note: 'iterator<std::random_access_iterator_tag, llvm::SwitchInst::CaseHandle>' has been explicitly marked deprecated here
+struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 iterator
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1066:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1043:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:9:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Transforms/IPO/ThinLTOBitcodeWriter.h:19:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/PassManager.h:40:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMap.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMapInfo.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/ArrayRef.h:15:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/STLExtras.h:20:
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:68:19: warning: 'iterator<std::random_access_iterator_tag, llvm::BasicBlock *, long, llvm::BasicBlock *, llvm::BasicBlock *>' is deprecated [-Wdeprecated-declarations]
+    : public std::iterator<IteratorCategoryT, T, DifferenceTypeT, PointerT,
+                  ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:206:14: note: in instantiation of template class 'llvm::iterator_facade_base<llvm::IndirectBrInst::succ_op_iterator, std::random_access_iterator_tag, llvm::BasicBlock *, long, llvm::BasicBlock *, llvm::BasicBlock *>' requested here
+    : public iterator_facade_base<DerivedT, IteratorCategoryT, T,
+             ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Instructions.h:3544:9: note: in instantiation of template class 'llvm::iterator_adaptor_base<llvm::IndirectBrInst::succ_op_iterator, llvm::User::value_op_iterator, std::random_access_iterator_tag, llvm::BasicBlock *, long, llvm::BasicBlock *, llvm::BasicBlock *>' requested here
+      : iterator_adaptor_base<succ_op_iterator, value_op_iterator,
+        ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__iterator/iterator.h:27:29: note: 'iterator<std::random_access_iterator_tag, llvm::BasicBlock *, long, llvm::BasicBlock *, llvm::BasicBlock *>' has been explicitly marked deprecated here
+struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 iterator
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1066:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1043:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:9:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Transforms/IPO/ThinLTOBitcodeWriter.h:19:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/PassManager.h:40:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMap.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMapInfo.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/ArrayRef.h:15:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/STLExtras.h:20:
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:68:19: warning: 'iterator<std::random_access_iterator_tag, const llvm::BasicBlock *, long, const llvm::BasicBlock *, const llvm::BasicBlock *>' is deprecated [-Wdeprecated-declarations]
+    : public std::iterator<IteratorCategoryT, T, DifferenceTypeT, PointerT,
+                  ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:206:14: note: in instantiation of template class 'llvm::iterator_facade_base<llvm::IndirectBrInst::const_succ_op_iterator, std::random_access_iterator_tag, const llvm::BasicBlock *, long, const llvm::BasicBlock *, const llvm::BasicBlock *>' requested here
+    : public iterator_facade_base<DerivedT, IteratorCategoryT, T,
+             ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Instructions.h:3555:9: note: in instantiation of template class 'llvm::iterator_adaptor_base<llvm::IndirectBrInst::const_succ_op_iterator, llvm::User::const_value_op_iterator, std::random_access_iterator_tag, const llvm::BasicBlock *, long, const llvm::BasicBlock *, const llvm::BasicBlock *>' requested here
+      : iterator_adaptor_base<const_succ_op_iterator, const_value_op_iterator,
+        ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__iterator/iterator.h:27:29: note: 'iterator<std::random_access_iterator_tag, const llvm::BasicBlock *, long, const llvm::BasicBlock *, const llvm::BasicBlock *>' has been explicitly marked deprecated here
+struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 iterator
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1066:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1043:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:9:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Transforms/IPO/ThinLTOBitcodeWriter.h:19:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/PassManager.h:40:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMap.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMapInfo.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/ArrayRef.h:15:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/STLExtras.h:20:
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:68:19: warning: 'iterator<std::random_access_iterator_tag, llvm::BasicBlock *>' is deprecated [-Wdeprecated-declarations]
+    : public std::iterator<IteratorCategoryT, T, DifferenceTypeT, PointerT,
+                  ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:206:14: note: in instantiation of template class 'llvm::iterator_facade_base<llvm::mapped_iterator<llvm::Use *, llvm::BasicBlock *(*)(llvm::Value *), llvm::BasicBlock *>, std::random_access_iterator_tag, llvm::BasicBlock *>' requested here
+    : public iterator_facade_base<DerivedT, IteratorCategoryT, T,
+             ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/STLExtras.h:290:14: note: in instantiation of template class 'llvm::iterator_adaptor_base<llvm::mapped_iterator<llvm::Use *, llvm::BasicBlock *(*)(llvm::Value *), llvm::BasicBlock *>, llvm::Use *, std::random_access_iterator_tag, llvm::BasicBlock *, long, llvm::BasicBlock **, llvm::BasicBlock *&>' requested here
+    : public iterator_adaptor_base<
+             ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Instructions.h:4248:20: note: in instantiation of template class 'llvm::mapped_iterator<llvm::Use *, llvm::BasicBlock *(*)(llvm::Value *), llvm::BasicBlock *>' requested here
+  handler_iterator handler_begin() {
+                   ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__iterator/iterator.h:27:29: note: 'iterator<std::random_access_iterator_tag, llvm::BasicBlock *>' has been explicitly marked deprecated here
+struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 iterator
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1066:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1043:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:9:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Transforms/IPO/ThinLTOBitcodeWriter.h:19:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/PassManager.h:40:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMap.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMapInfo.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/ArrayRef.h:15:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/STLExtras.h:20:
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:68:19: warning: 'iterator<std::random_access_iterator_tag, const llvm::BasicBlock *>' is deprecated [-Wdeprecated-declarations]
+    : public std::iterator<IteratorCategoryT, T, DifferenceTypeT, PointerT,
+                  ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:206:14: note: in instantiation of template class 'llvm::iterator_facade_base<llvm::mapped_iterator<const llvm::Use *, const llvm::BasicBlock *(*)(const llvm::Value *), const llvm::BasicBlock *>, std::random_access_iterator_tag, const llvm::BasicBlock *>' requested here
+    : public iterator_facade_base<DerivedT, IteratorCategoryT, T,
+             ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/STLExtras.h:290:14: note: in instantiation of template class 'llvm::iterator_adaptor_base<llvm::mapped_iterator<const llvm::Use *, const llvm::BasicBlock *(*)(const llvm::Value *), const llvm::BasicBlock *>, const llvm::Use *, std::random_access_iterator_tag, const llvm::BasicBlock *, long, const llvm::BasicBlock **, const llvm::BasicBlock *&>' requested here
+    : public iterator_adaptor_base<
+             ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Instructions.h:4257:26: note: in instantiation of template class 'llvm::mapped_iterator<const llvm::Use *, const llvm::BasicBlock *(*)(const llvm::Value *), const llvm::BasicBlock *>' requested here
+  const_handler_iterator handler_begin() const {
+                         ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__iterator/iterator.h:27:29: note: 'iterator<std::random_access_iterator_tag, const llvm::BasicBlock *>' has been explicitly marked deprecated here
+struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 iterator
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1066:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1043:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:9:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Transforms/IPO/ThinLTOBitcodeWriter.h:19:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/PassManager.h:40:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMap.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMapInfo.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/ArrayRef.h:15:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/STLExtras.h:20:
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:68:19: warning: 'iterator<std::forward_iterator_tag, const llvm::StringMapEntry<std::pair<unsigned long long, std::array<unsigned int, 5>>>>' is deprecated [-Wdeprecated-declarations]
+    : public std::iterator<IteratorCategoryT, T, DifferenceTypeT, PointerT,
+                  ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/StringMap.h:370:14: note: in instantiation of template class 'llvm::iterator_facade_base<llvm::StringMapConstIterator<std::pair<unsigned long long, std::array<unsigned int, 5>>>, std::forward_iterator_tag, const llvm::StringMapEntry<std::pair<unsigned long long, std::array<unsigned int, 5>>>>' requested here
+    : public iterator_facade_base<DerivedTy, std::forward_iterator_tag,
+             ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/StringMap.h:413:14: note: in instantiation of template class 'llvm::StringMapIterBase<llvm::StringMapConstIterator<std::pair<unsigned long long, std::array<unsigned int, 5>>>, const llvm::StringMapEntry<std::pair<unsigned long long, std::array<unsigned int, 5>>>>' requested here
+    : public StringMapIterBase<StringMapConstIterator<ValueTy>,
+             ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/ModuleSummaryIndex.h:1360:37: note: in instantiation of template class 'llvm::StringMapConstIterator<std::pair<unsigned long long, std::array<unsigned int, 5>>>' requested here
+    auto It = ModulePathStringTable.find(ModPath);
+                                    ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__iterator/iterator.h:27:29: note: 'iterator<std::forward_iterator_tag, const llvm::StringMapEntry<std::pair<unsigned long long, std::array<unsigned int, 5>>>>' has been explicitly marked deprecated here
+struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 iterator
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1066:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1043:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:9:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Transforms/IPO/ThinLTOBitcodeWriter.h:19:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/PassManager.h:40:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMap.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMapInfo.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/ArrayRef.h:15:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/STLExtras.h:20:
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:68:19: warning: 'iterator<std::forward_iterator_tag, llvm::StringMapEntry<std::pair<unsigned long long, std::array<unsigned int, 5>>>>' is deprecated [-Wdeprecated-declarations]
+    : public std::iterator<IteratorCategoryT, T, DifferenceTypeT, PointerT,
+                  ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/StringMap.h:370:14: note: in instantiation of template class 'llvm::iterator_facade_base<llvm::StringMapIterator<std::pair<unsigned long long, std::array<unsigned int, 5>>>, std::forward_iterator_tag, llvm::StringMapEntry<std::pair<unsigned long long, std::array<unsigned int, 5>>>>' requested here
+    : public iterator_facade_base<DerivedTy, std::forward_iterator_tag,
+             ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/StringMap.h:430:34: note: in instantiation of template class 'llvm::StringMapIterBase<llvm::StringMapIterator<std::pair<unsigned long long, std::array<unsigned int, 5>>>, llvm::StringMapEntry<std::pair<unsigned long long, std::array<unsigned int, 5>>>>' requested here
+class StringMapIterator : public StringMapIterBase<StringMapIterator<ValueTy>,
+                                 ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__utility/pair.h:50:9: note: in instantiation of template class 'llvm::StringMapIterator<std::pair<unsigned long long, std::array<unsigned int, 5>>>' requested here
+    _T1 first;
+        ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/ModuleSummaryIndex.h:1390:36: note: in instantiation of template class 'std::pair<llvm::StringMapIterator<std::pair<unsigned long long, std::array<unsigned int, 5>>>, bool>' requested here
+    return &*ModulePathStringTable.insert({ModPath, {ModId, Hash}}).first;
+                                   ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__iterator/iterator.h:27:29: note: 'iterator<std::forward_iterator_tag, llvm::StringMapEntry<std::pair<unsigned long long, std::array<unsigned int, 5>>>>' has been explicitly marked deprecated here
+struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 iterator
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1066:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1043:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:9:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Transforms/IPO/ThinLTOBitcodeWriter.h:19:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/PassManager.h:40:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMap.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMapInfo.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/ArrayRef.h:15:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/STLExtras.h:20:
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:68:19: warning: 'iterator<std::random_access_iterator_tag, llvm::ValueInfo>' is deprecated [-Wdeprecated-declarations]
+    : public std::iterator<IteratorCategoryT, T, DifferenceTypeT, PointerT,
+                  ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:206:14: note: in instantiation of template class 'llvm::iterator_facade_base<llvm::mapped_iterator<std::__wrap_iter<std::pair<llvm::ValueInfo, llvm::CalleeInfo> *>, llvm::ValueInfo (*)(std::pair<llvm::ValueInfo, llvm::CalleeInfo> &), llvm::ValueInfo>, std::random_access_iterator_tag, llvm::ValueInfo>' requested here
+    : public iterator_facade_base<DerivedT, IteratorCategoryT, T,
+             ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/STLExtras.h:290:14: note: in instantiation of template class 'llvm::iterator_adaptor_base<llvm::mapped_iterator<std::__wrap_iter<std::pair<llvm::ValueInfo, llvm::CalleeInfo> *>, llvm::ValueInfo (*)(std::pair<llvm::ValueInfo, llvm::CalleeInfo> &), llvm::ValueInfo>, std::__wrap_iter<std::pair<llvm::ValueInfo, llvm::CalleeInfo> *>, std::random_access_iterator_tag, llvm::ValueInfo, long, llvm::ValueInfo *, llvm::ValueInfo &>' requested here
+    : public iterator_adaptor_base<
+             ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/ModuleSummaryIndex.h:1515:28: note: in instantiation of template class 'llvm::mapped_iterator<std::__wrap_iter<std::pair<llvm::ValueInfo, llvm::CalleeInfo> *>, llvm::ValueInfo (*)(std::pair<llvm::ValueInfo, llvm::CalleeInfo> &), llvm::ValueInfo>' requested here
+  static ChildIteratorType child_begin(NodeRef N) {
+                           ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__iterator/iterator.h:27:29: note: 'iterator<std::random_access_iterator_tag, llvm::ValueInfo>' has been explicitly marked deprecated here
+struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 iterator
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1066:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1043:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/DebugInfo.h:23:
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/DebugInfoMetadata.h:83:25: warning: 'iterator<std::input_iterator_tag, llvm::DIType *, long, void, llvm::DIType *>' is deprecated [-Wdeprecated-declarations]
+  class iterator : std::iterator<std::input_iterator_tag, DIType *,
+                        ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__iterator/iterator.h:27:29: note: 'iterator<std::input_iterator_tag, llvm::DIType *, long, void, llvm::DIType *>' has been explicitly marked deprecated here
+struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 iterator
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1066:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1043:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:9:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Transforms/IPO/ThinLTOBitcodeWriter.h:19:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/PassManager.h:44:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Function.h:27:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/BasicBlock.h:22:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Instruction.h:22:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/DebugLoc.h:17:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/TrackingMDRef.h:16:
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Metadata.h:1199:19: warning: 'iterator<std::input_iterator_tag, llvm::DINode *, long, void, llvm::DINode *>' is deprecated [-Wdeprecated-declarations]
+    : public std::iterator<std::input_iterator_tag, T *, std::ptrdiff_t, void,
+                  ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/DebugInfoMetadata.h:1070:21: note: in instantiation of template class 'llvm::TypedMDOperandIterator<llvm::DINode>' requested here
+    for (DINode *Op : getElements())
+                    ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__iterator/iterator.h:27:29: note: 'iterator<std::input_iterator_tag, llvm::DINode *, long, void, llvm::DINode *>' has been explicitly marked deprecated here
+struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 iterator
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1066:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1043:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/DebugInfo.h:23:
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/DebugInfoMetadata.h:2453:21: warning: 'iterator<std::input_iterator_tag, llvm::DIExpression::ExprOperand>' is deprecated [-Wdeprecated-declarations]
+      : public std::iterator<std::input_iterator_tag, ExprOperand> {
+                    ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__iterator/iterator.h:27:29: note: 'iterator<std::input_iterator_tag, llvm::DIExpression::ExprOperand>' has been explicitly marked deprecated here
+struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 iterator
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1066:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1043:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:9:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Transforms/IPO/ThinLTOBitcodeWriter.h:19:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/PassManager.h:44:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Function.h:27:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/BasicBlock.h:22:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Instruction.h:22:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/DebugLoc.h:17:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/TrackingMDRef.h:16:
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/Metadata.h:1199:19: warning: 'iterator<std::input_iterator_tag, llvm::DIMacroNode *, long, void, llvm::DIMacroNode *>' is deprecated [-Wdeprecated-declarations]
+    : public std::iterator<std::input_iterator_tag, T *, std::ptrdiff_t, void,
+                  ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/DebugInfoMetadata.h:3309:26: note: in instantiation of template class 'llvm::TypedMDOperandIterator<llvm::DIMacroNode>' requested here
+    for (DIMacroNode *Op : getElements())
+                         ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__iterator/iterator.h:27:29: note: 'iterator<std::input_iterator_tag, llvm::DIMacroNode *, long, void, llvm::DIMacroNode *>' has been explicitly marked deprecated here
+struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 iterator
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1066:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1043:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:21:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Object/ModuleSymbolTable.h:21:
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Object/SymbolicFile.h:69:19: warning: 'iterator<std::forward_iterator_tag, llvm::object::BasicSymbolRef>' is deprecated [-Wdeprecated-declarations]
+    : public std::iterator<std::forward_iterator_tag, content_type> {
+                  ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator_range.h:32:13: note: in instantiation of template class 'llvm::object::content_iterator<llvm::object::BasicSymbolRef>' requested here
+  IteratorT begin_iterator, end_iterator;
+            ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Object/SymbolicFile.h:157:31: note: in instantiation of template class 'llvm::iterator_range<llvm::object::content_iterator<llvm::object::BasicSymbolRef>>' requested here
+  basic_symbol_iterator_range symbols() const {
+                              ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__iterator/iterator.h:27:29: note: 'iterator<std::forward_iterator_tag, llvm::object::BasicSymbolRef>' has been explicitly marked deprecated here
+struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 iterator
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1066:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1043:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:9:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Transforms/IPO/ThinLTOBitcodeWriter.h:19:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/PassManager.h:40:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMap.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMapInfo.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/ArrayRef.h:15:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/STLExtras.h:20:
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:68:19: warning: 'iterator<std::forward_iterator_tag, llvm::LazyCallGraph::Edge>' is deprecated [-Wdeprecated-declarations]
+    : public std::iterator<IteratorCategoryT, T, DifferenceTypeT, PointerT,
+                  ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:206:14: note: in instantiation of template class 'llvm::iterator_facade_base<llvm::LazyCallGraph::EdgeSequence::iterator, std::forward_iterator_tag, llvm::LazyCallGraph::Edge>' requested here
+    : public iterator_facade_base<DerivedT, IteratorCategoryT, T,
+             ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Analysis/LazyCallGraph.h:197:18: note: in instantiation of template class 'llvm::iterator_adaptor_base<llvm::LazyCallGraph::EdgeSequence::iterator, llvm::LazyCallGraph::Edge *, std::forward_iterator_tag, llvm::LazyCallGraph::Edge, long, llvm::LazyCallGraph::Edge *, llvm::LazyCallGraph::Edge &>' requested here
+        : public iterator_adaptor_base<iterator, VectorImplT::iterator,
+                 ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__iterator/iterator.h:27:29: note: 'iterator<std::forward_iterator_tag, llvm::LazyCallGraph::Edge>' has been explicitly marked deprecated here
+struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 iterator
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1066:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1043:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:9:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Transforms/IPO/ThinLTOBitcodeWriter.h:19:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/PassManager.h:40:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMap.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMapInfo.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/ArrayRef.h:15:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/STLExtras.h:20:
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:68:19: warning: 'iterator<std::forward_iterator_tag, llvm::LazyCallGraph::Edge>' is deprecated [-Wdeprecated-declarations]
+    : public std::iterator<IteratorCategoryT, T, DifferenceTypeT, PointerT,
+                  ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:206:14: note: in instantiation of template class 'llvm::iterator_facade_base<llvm::LazyCallGraph::EdgeSequence::call_iterator, std::forward_iterator_tag, llvm::LazyCallGraph::Edge>' requested here
+    : public iterator_facade_base<DerivedT, IteratorCategoryT, T,
+             ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Analysis/LazyCallGraph.h:228:18: note: in instantiation of template class 'llvm::iterator_adaptor_base<llvm::LazyCallGraph::EdgeSequence::call_iterator, llvm::LazyCallGraph::Edge *, std::forward_iterator_tag, llvm::LazyCallGraph::Edge, long, llvm::LazyCallGraph::Edge *, llvm::LazyCallGraph::Edge &>' requested here
+        : public iterator_adaptor_base<call_iterator, VectorImplT::iterator,
+                 ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__iterator/iterator.h:27:29: note: 'iterator<std::forward_iterator_tag, llvm::LazyCallGraph::Edge>' has been explicitly marked deprecated here
+struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 iterator
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1066:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1043:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:9:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Transforms/IPO/ThinLTOBitcodeWriter.h:19:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/PassManager.h:40:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMap.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMapInfo.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/ArrayRef.h:15:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/STLExtras.h:20:
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:68:19: warning: 'iterator<std::forward_iterator_tag, llvm::LazyCallGraph::RefSCC>' is deprecated [-Wdeprecated-declarations]
+    : public std::iterator<IteratorCategoryT, T, DifferenceTypeT, PointerT,
+                  ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Analysis/LazyCallGraph.h:887:16: note: in instantiation of template class 'llvm::iterator_facade_base<llvm::LazyCallGraph::postorder_ref_scc_iterator, std::forward_iterator_tag, llvm::LazyCallGraph::RefSCC>' requested here
+      : public iterator_facade_base<postorder_ref_scc_iterator,
+               ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__iterator/iterator.h:27:29: note: 'iterator<std::forward_iterator_tag, llvm::LazyCallGraph::RefSCC>' has been explicitly marked deprecated here
+struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 iterator
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1066:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1043:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:9:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Transforms/IPO/ThinLTOBitcodeWriter.h:19:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/PassManager.h:40:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMap.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMapInfo.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/ArrayRef.h:15:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/STLExtras.h:20:
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:68:19: warning: 'iterator<std::random_access_iterator_tag, llvm::LazyCallGraph::Node>' is deprecated [-Wdeprecated-declarations]
+    : public std::iterator<IteratorCategoryT, T, DifferenceTypeT, PointerT,
+                  ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:206:14: note: in instantiation of template class 'llvm::iterator_facade_base<llvm::pointee_iterator<llvm::LazyCallGraph::Node *const *, llvm::LazyCallGraph::Node>, std::random_access_iterator_tag, llvm::LazyCallGraph::Node>' requested here
+    : public iterator_facade_base<DerivedT, IteratorCategoryT, T,
+             ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:287:7: note: in instantiation of template class 'llvm::iterator_adaptor_base<llvm::pointee_iterator<llvm::LazyCallGraph::Node *const *, llvm::LazyCallGraph::Node>, llvm::LazyCallGraph::Node *const *, std::random_access_iterator_tag, llvm::LazyCallGraph::Node, long, llvm::LazyCallGraph::Node *, llvm::LazyCallGraph::Node &>' requested here
+    : iterator_adaptor_base<
+      ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Analysis/LazyCallGraph.h:457:35: note: in instantiation of template class 'llvm::pointee_iterator<llvm::LazyCallGraph::Node *const *, llvm::LazyCallGraph::Node>' requested here
+      for (LazyCallGraph::Node &N : C) {
+                                  ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__iterator/iterator.h:27:29: note: 'iterator<std::random_access_iterator_tag, llvm::LazyCallGraph::Node>' has been explicitly marked deprecated here
+struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 iterator
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1066:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1043:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:9:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Transforms/IPO/ThinLTOBitcodeWriter.h:19:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/PassManager.h:40:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMap.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMapInfo.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/ArrayRef.h:15:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/STLExtras.h:20:
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:68:19: warning: 'iterator<std::random_access_iterator_tag, llvm::LazyCallGraph::SCC>' is deprecated [-Wdeprecated-declarations]
+    : public std::iterator<IteratorCategoryT, T, DifferenceTypeT, PointerT,
+                  ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:206:14: note: in instantiation of template class 'llvm::iterator_facade_base<llvm::pointee_iterator<llvm::LazyCallGraph::SCC *const *, llvm::LazyCallGraph::SCC>, std::random_access_iterator_tag, llvm::LazyCallGraph::SCC>' requested here
+    : public iterator_facade_base<DerivedT, IteratorCategoryT, T,
+             ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:287:7: note: in instantiation of template class 'llvm::iterator_adaptor_base<llvm::pointee_iterator<llvm::LazyCallGraph::SCC *const *, llvm::LazyCallGraph::SCC>, llvm::LazyCallGraph::SCC *const *, std::random_access_iterator_tag, llvm::LazyCallGraph::SCC, long, llvm::LazyCallGraph::SCC *, llvm::LazyCallGraph::SCC &>' requested here
+    : iterator_adaptor_base<
+      ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Analysis/LazyCallGraph.h:578:34: note: in instantiation of template class 'llvm::pointee_iterator<llvm::LazyCallGraph::SCC *const *, llvm::LazyCallGraph::SCC>' requested here
+      for (LazyCallGraph::SCC &C : RC) {
+                                 ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__iterator/iterator.h:27:29: note: 'iterator<std::random_access_iterator_tag, llvm::LazyCallGraph::SCC>' has been explicitly marked deprecated here
+struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 iterator
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1066:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1043:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:29:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Transforms/Utils/Cloning.h:23:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Analysis/InlineCost.h:18:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Analysis/OptimizationRemarkEmitter.h:19:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/DiagnosticInfo.h:24:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Support/YAMLTraits.h:23:
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Support/YAMLParser.h:324:19: warning: 'iterator<std::input_iterator_tag, llvm::yaml::KeyValueNode>' is deprecated [-Wdeprecated-declarations]
+    : public std::iterator<std::input_iterator_tag, ValueT> {
+                  ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Support/YAMLParser.h:425:12: note: in instantiation of template class 'llvm::yaml::basic_collection_iterator<llvm::yaml::MappingNode, llvm::yaml::KeyValueNode>' requested here
+  iterator begin() { return yaml::begin(*this); }
+           ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__iterator/iterator.h:27:29: note: 'iterator<std::input_iterator_tag, llvm::yaml::KeyValueNode>' has been explicitly marked deprecated here
+struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 iterator
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1066:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1043:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:29:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Transforms/Utils/Cloning.h:23:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Analysis/InlineCost.h:18:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Analysis/OptimizationRemarkEmitter.h:19:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/DiagnosticInfo.h:24:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Support/YAMLTraits.h:23:
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Support/YAMLParser.h:324:19: warning: 'iterator<std::input_iterator_tag, llvm::yaml::Node>' is deprecated [-Wdeprecated-declarations]
+    : public std::iterator<std::input_iterator_tag, ValueT> {
+                  ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Support/YAMLParser.h:482:12: note: in instantiation of template class 'llvm::yaml::basic_collection_iterator<llvm::yaml::SequenceNode, llvm::yaml::Node>' requested here
+  iterator begin() { return yaml::begin(*this); }
+           ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__iterator/iterator.h:27:29: note: 'iterator<std::input_iterator_tag, llvm::yaml::Node>' has been explicitly marked deprecated here
+struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 iterator
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1066:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1043:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:9:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Transforms/IPO/ThinLTOBitcodeWriter.h:19:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/PassManager.h:40:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMap.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMapInfo.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/ArrayRef.h:15:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/STLExtras.h:20:
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:68:19: warning: 'iterator<std::forward_iterator_tag, llvm::GlobalValue>' is deprecated [-Wdeprecated-declarations]
+    : public std::iterator<IteratorCategoryT, T, DifferenceTypeT, PointerT,
+                  ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/STLExtras.h:888:14: note: in instantiation of template class 'llvm::iterator_facade_base<llvm::concat_iterator<llvm::GlobalValue, llvm::ilist_iterator<llvm::ilist_detail::node_options<llvm::Function, false, false, void>, false, false>, llvm::ilist_iterator<llvm::ilist_detail::node_options<llvm::GlobalVariable, false, false, void>, false, false>, llvm::ilist_iterator<llvm::ilist_detail::node_options<llvm::GlobalAlias, false, false, void>, false, false>, llvm::ilist_iterator<llvm::ilist_detail::node_options<llvm::GlobalIFunc, false, false, void>, false, false>>, std::forward_iterator_tag, llvm::GlobalValue>' requested here
+    : public iterator_facade_base<concat_iterator<ValueT, IterTs...>,
+             ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator_range.h:32:13: note: in instantiation of template class 'llvm::concat_iterator<llvm::GlobalValue, llvm::ilist_iterator<llvm::ilist_detail::node_options<llvm::Function, false, false, void>, false, false>, llvm::ilist_iterator<llvm::ilist_detail::node_options<llvm::GlobalVariable, false, false, void>, false, false>, llvm::ilist_iterator<llvm::ilist_detail::node_options<llvm::GlobalAlias, false, false, void>, false, false>, llvm::ilist_iterator<llvm::ilist_detail::node_options<llvm::GlobalIFunc, false, false, void>, false, false>>' requested here
+  IteratorT begin_iterator, end_iterator;
+            ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:40:33: note: in instantiation of template class 'llvm::iterator_range<llvm::concat_iterator<llvm::GlobalValue, llvm::ilist_iterator<llvm::ilist_detail::node_options<llvm::Function, false, false, void>, false, false>, llvm::ilist_iterator<llvm::ilist_detail::node_options<llvm::GlobalVariable, false, false, void>, false, false>, llvm::ilist_iterator<llvm::ilist_detail::node_options<llvm::GlobalAlias, false, false, void>, false, false>, llvm::ilist_iterator<llvm::ilist_detail::node_options<llvm::GlobalIFunc, false, false, void>, false, false>>>' requested here
+  for (auto &ExportGV : ExportM.global_values()) {
+                                ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__iterator/iterator.h:27:29: note: 'iterator<std::forward_iterator_tag, llvm::GlobalValue>' has been explicitly marked deprecated here
+struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 iterator
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1066:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1043:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:58:17: error: no viable conversion from 'llvm::StringRef' to 'std::string' (aka 'basic_string<char, char_traits<char>, allocator<char>>')
+    std::string NewName = Name;
+                ^         ~~~~
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/string:822:5: note: candidate constructor not viable: no known conversion from 'llvm::StringRef' to 'const std::string &' for 1st argument
+    basic_string(const basic_string& __str);
+    ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/string:827:5: note: candidate constructor not viable: no known conversion from 'llvm::StringRef' to 'std::string &&' for 1st argument
+    basic_string(basic_string&& __str)
+    ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/string:840:5: note: candidate constructor template not viable: no known conversion from 'llvm::StringRef' to 'const char *' for 1st argument
+    basic_string(const _CharT* __s) : __r_(__default_init_tag(), __default_init_tag()) {
+    ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/string:895:5: note: candidate constructor not viable: no known conversion from 'llvm::StringRef' to 'initializer_list<char>' for 1st argument
+    basic_string(initializer_list<_CharT> __il);
+    ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/string:815:40: note: explicit constructor is not a candidate
+    _LIBCPP_INLINE_VISIBILITY explicit basic_string(const allocator_type& __a)
+                                       ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/string:881:18: note: explicit constructor is not a candidate
+        explicit basic_string(const _Tp& __t);
+                 ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/StringRef.h:275:14: note: explicit conversion function is not a candidate
+    explicit operator std::string() const { return str(); }
+             ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/StringRef.h:278:5: note: candidate function
+    operator std::string_view() const {
+    ^
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:9:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Transforms/IPO/ThinLTOBitcodeWriter.h:19:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/PassManager.h:40:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMap.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMapInfo.h:16:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/ArrayRef.h:15:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/STLExtras.h:20:
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator.h:68:19: warning: 'iterator<std::forward_iterator_tag, llvm::GlobalObject>' is deprecated [-Wdeprecated-declarations]
+    : public std::iterator<IteratorCategoryT, T, DifferenceTypeT, PointerT,
+                  ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/STLExtras.h:888:14: note: in instantiation of template class 'llvm::iterator_facade_base<llvm::concat_iterator<llvm::GlobalObject, llvm::ilist_iterator<llvm::ilist_detail::node_options<llvm::Function, false, false, void>, false, false>, llvm::ilist_iterator<llvm::ilist_detail::node_options<llvm::GlobalVariable, false, false, void>, false, false>>, std::forward_iterator_tag, llvm::GlobalObject>' requested here
+    : public iterator_facade_base<concat_iterator<ValueT, IterTs...>,
+             ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/iterator_range.h:32:13: note: in instantiation of template class 'llvm::concat_iterator<llvm::GlobalObject, llvm::ilist_iterator<llvm::ilist_detail::node_options<llvm::Function, false, false, void>, false, false>, llvm::ilist_iterator<llvm::ilist_detail::node_options<llvm::GlobalVariable, false, false, void>, false, false>>' requested here
+  IteratorT begin_iterator, end_iterator;
+            ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:75:29: note: in instantiation of template class 'llvm::iterator_range<llvm::concat_iterator<llvm::GlobalObject, llvm::ilist_iterator<llvm::ilist_detail::node_options<llvm::Function, false, false, void>, false, false>, llvm::ilist_iterator<llvm::ilist_detail::node_options<llvm::GlobalVariable, false, false, void>, false, false>>>' requested here
+    for (auto &GO : ExportM.global_objects())
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__iterator/iterator.h:27:29: note: 'iterator<std::forward_iterator_tag, llvm::GlobalObject>' has been explicitly marked deprecated here
+struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 iterator
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1066:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1043:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:29:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Transforms/Utils/Cloning.h:25:
+In file included from /Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/Transforms/Utils/ValueMapper.h:19:
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/ValueMap.h:328:17: warning: 'iterator<std::forward_iterator_tag, std::pair<const llvm::Value *, llvm::WeakTrackingVH>>' is deprecated [-Wdeprecated-declarations]
+    public std::iterator<std::forward_iterator_tag,
+                ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__utility/pair.h:50:9: note: in instantiation of template class 'llvm::ValueMapIterator<llvm::DenseMap<llvm::ValueMapCallbackVH<const llvm::Value *, llvm::WeakTrackingVH, llvm::ValueMapConfig<const llvm::Value *>>, llvm::WeakTrackingVH>, const llvm::Value *>' requested here
+    _T1 first;
+        ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/ValueMap.h:291:19: note: in instantiation of template class 'std::pair<llvm::ValueMapIterator<llvm::DenseMap<llvm::ValueMapCallbackVH<const llvm::Value *, llvm::WeakTrackingVH, llvm::ValueMapConfig<const llvm::Value *>>, llvm::WeakTrackingVH>, const llvm::Value *>, bool>' requested here
+        Copy.Map->insert(std::make_pair(typed_new_key, std::move(Target)));
+                  ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMap.h:379:27: note: in instantiation of member function 'llvm::ValueMapCallbackVH<const llvm::Value *, llvm::WeakTrackingVH, llvm::ValueMapConfig<const llvm::Value *>>::allUsesReplacedWith' requested here
+    const KeyT EmptyKey = getEmptyKey();
+                          ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMap.h:795:20: note: in instantiation of member function 'llvm::DenseMapBase<llvm::DenseMap<llvm::ValueMapCallbackVH<const llvm::Value *, llvm::WeakTrackingVH, llvm::ValueMapConfig<const llvm::Value *>>, llvm::WeakTrackingVH>, llvm::ValueMapCallbackVH<const llvm::Value *, llvm::WeakTrackingVH, llvm::ValueMapConfig<const llvm::Value *>>, llvm::WeakTrackingVH, llvm::DenseMapInfo<llvm::ValueMapCallbackVH<const llvm::Value *, llvm::WeakTrackingVH, llvm::ValueMapConfig<const llvm::Value *>>>, llvm::detail::DenseMapPair<llvm::ValueMapCallbackVH<const llvm::Value *, llvm::WeakTrackingVH, llvm::ValueMapConfig<const llvm::Value *>>, llvm::WeakTrackingVH>>::initEmpty' requested here
+      this->BaseT::initEmpty();
+                   ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/ADT/DenseMap.h:730:52: note: in instantiation of member function 'llvm::DenseMap<llvm::ValueMapCallbackVH<const llvm::Value *, llvm::WeakTrackingVH, llvm::ValueMapConfig<const llvm::Value *>>, llvm::WeakTrackingVH>::init' requested here
+  explicit DenseMap(unsigned InitialReserve = 0) { init(InitialReserve); }
+                                                   ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/include/llvm/IR/ValueMap.h:104:9: note: in instantiation of member function 'llvm::DenseMap<llvm::ValueMapCallbackVH<const llvm::Value *, llvm::WeakTrackingVH, llvm::ValueMapConfig<const llvm::Value *>>, llvm::WeakTrackingVH>::DenseMap' requested here
+      : Map(NumInitBuckets), Data() {}
+        ^
+/Users/nikitanazarov/Projects/llvm-project/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp:275:21: note: in instantiation of member function 'llvm::ValueMap<const llvm::Value *, llvm::WeakTrackingVH>::ValueMap' requested here
+  ValueToValueMapTy VMap;
+                    ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__iterator/iterator.h:27:29: note: 'iterator<std::forward_iterator_tag, std::pair<const llvm::Value *, llvm::WeakTrackingVH>>' has been explicitly marked deprecated here
+struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX17 iterator
+                            ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1066:39: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX17'
+#  define _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_DEPRECATED
+                                      ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/usr/include/c++/v1/__config:1043:48: note: expanded from macro '_LIBCPP_DEPRECATED'
+#    define _LIBCPP_DEPRECATED __attribute__ ((deprecated))
+                                               ^
+38 warnings and 1 error generated.
+ninja: build stopped: subcommand failed.

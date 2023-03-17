@@ -6,6 +6,8 @@
 //
 //===----------------------------------------------------------------------===//
 
+#include <iostream>
+
 #include "llvm/Bitcode/BitcodeReader.h"
 #include "MetadataLoader.h"
 #include "ValueList.h"
@@ -1641,6 +1643,7 @@ Error BitcodeReader::parseAttributeGroupBlock() {
 
           B.addAttribute(KindStr.str(), ValStr.str());
         } else {
+          std::cout << "Record: " << Record[i];
           assert((Record[i] == 5 || Record[i] == 6) &&
                  "Invalid attribute group entry");
           bool HasType = Record[i] == 6;

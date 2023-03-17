@@ -920,8 +920,7 @@ void ThinLTOCodeGenerator::optimize(Module &TheModule, ModuleSummaryIndex *Index
     return;
 
   // Optimize now
-  optimizeModule(TheModule, *TMBuilder.create(), OptLevel, Freestanding,
-                 nullptr);
+  optimizeModule(TheModule, *TMBuilder.create(), OptLevel, Freestanding, Index);
 }
 
 /// Write out the generated object file, either from CacheEntryPath or from
