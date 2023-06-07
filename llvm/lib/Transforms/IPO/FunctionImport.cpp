@@ -53,6 +53,7 @@
 #include <system_error>
 #include <tuple>
 #include <utility>
+#include <iostream>
 
 using namespace llvm;
 
@@ -1285,9 +1286,13 @@ Expected<bool> FunctionImporter::importFunctions(
     auto &ImportGUIDs = FunctionsToImportPerModule->second;
     // Find the globals to import
     SetVector<GlobalValue *> GlobalsToImport;
+
+	auto MNAME = SrcModule->getName().str();
+	std::cout << "############## MODULE: " << SrcModule->getName().str() << std::endl;
     for (Function &F : *SrcModule) {
       if (!F.hasName())
         continue;
+	std::cout << "M: " << MNAME << " Function: " << F.getName().str() << std::endl;
       auto GUID = F.getGUID();
       auto Import = ImportGUIDs.count(GUID);
       LLVM_DEBUG(dbgs() << (Import ? "Is" : "Not") << " importing function "
@@ -1310,6 +1315,7 @@ Expected<bool> FunctionImporter::importFunctions(
     for (GlobalVariable &GV : SrcModule->globals()) {
       if (!GV.hasName())
         continue;
+	std::cout << "Variable: " << GV.getName().str() << std::endl;
       auto GUID = GV.getGUID();
       auto Import = ImportGUIDs.count(GUID);
       LLVM_DEBUG(dbgs() << (Import ? "Is" : "Not") << " importing global "
@@ -1322,8 +1328,37 @@ Expected<bool> FunctionImporter::importFunctions(
       }
     }
     for (GlobalAlias &GA : SrcModule->aliases()) {
-      if (!GA.hasName() || isa<GlobalIFunc>(GA.getAliaseeObject()))
+	auto aliasee = GA.getAliaseeObject();
+		if (isa<GlobalVariable>(GA.getAliaseeObject()))
+			std::cout << "GLOBAL VARIABLE: " << aliasee->getName().str() << std::endl;
+      if (!GA.hasName() || isa<GlobalIFunc>(GA.getAliaseeObject()) || isa<GlobalVariable>(GA.getAliaseeObject()))
         continue;
+	//std::cout << "Alias: " << GA.getName().str() << std::endl;
+	//std::cout << "Aliasee: " << aliasee->getName().str() << std::endl;
+	////std::cout << "NullValue: " << isa<NullValue>(aliasee) << std::endl;
+	//std::cout << "Argument: " << isa<Argument>(aliasee) << std::endl;
+	//std::cout << "BasicBlock: " << isa<BasicBlock>(aliasee) << std::endl;
+	////std::cout << "InlineAsm: " << isa<InlineAsm>(aliasee) << std::endl;
+	////std::cout << "MDNode: " << isa<MDNode>(aliasee) << std::endl;
+	////std::cout << "MDString: " << isa<MDString>(aliasee) << std::endl;
+	//std::cout << "BlockAddress: " << isa<BlockAddress>(aliasee) << std::endl;
+	//std::cout << "ConstantAggregateZero: " << isa<ConstantAggregateZero>(aliasee) << std::endl;
+	//std::cout << "ConstantArray: " << isa<ConstantArray>(aliasee) << std::endl;
+	//std::cout << "ConstantDataArray: " << isa<ConstantDataArray>(aliasee) << std::endl;
+	//std::cout << "ConstantDataVector: " << isa<ConstantDataVector>(aliasee) << std::endl;
+	//std::cout << "ConstantExpr: " << isa<ConstantExpr>(aliasee) << std::endl;
+	//std::cout << "ConstantFP: " << isa<ConstantFP>(aliasee) << std::endl;
+	//std::cout << "ConstantInt: " << isa<ConstantInt>(aliasee) << std::endl;
+	//std::cout << "ConstantPointerNull: " << isa<ConstantPointerNull>(aliasee) << std::endl;
+	//std::cout << "ConstantStruct: " << isa<ConstantStruct>(aliasee) << std::endl;
+	//std::cout << "ConstantVector: " << isa<ConstantVector>(aliasee) << std::endl;
+	//std::cout << "Function: " << isa<Function>(aliasee) << std::endl;
+	//std::cout << "GlobalAlias: " << isa<GlobalAlias>(aliasee) << std::endl;
+	//std::cout << "GlobalIFunc: " << isa<GlobalIFunc>(aliasee) << std::endl;
+	//std::cout << "GlobalVariable: " << isa<GlobalVariable>(aliasee) << std::endl;
+	//std::cout << "UndefValue: " << isa<UndefValue>(aliasee) << std::endl;
+	//std::cout << "PoisonValue: " << isa<PoisonValue>(aliasee) << std::endl;
+	//std::cout << "Instruction: " << isa<Instruction>(aliasee) << std::endl;
       auto GUID = GA.getGUID();
       auto Import = ImportGUIDs.count(GUID);
       LLVM_DEBUG(dbgs() << (Import ? "Is" : "Not") << " importing alias "

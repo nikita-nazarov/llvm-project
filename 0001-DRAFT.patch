@@ -1,0 +1,478 @@
+From 82100fc1032cd59b565c5b81aa49e9f9e85ed014 Mon Sep 17 00:00:00 2001
+From: Nikita Nazarov <nikitanazarov@google.com>
+Date: Mon, 6 Mar 2023 11:31:39 +0100
+Subject: [PATCH 1/1] DRAFT
+
+---
+ Makefile                                      |   3 +
+ .../llvm/LTO/legacy/ThinLTOCodeGenerator.h    |  12 +-
+ llvm/lib/IR/Globals.cpp                       |   2 +-
+ llvm/lib/LTO/ThinLTOCodeGenerator.cpp         |  63 +++++++-
+ llvm/lib/Transforms/IPO/FunctionImport.cpp    |   5 +-
+ .../Transforms/Utils/FunctionImportUtils.cpp  |   8 +-
+ llvm/tools/llvm-lto/llvm-lto.cpp              | 137 +++++++++++++++++-
+ 7 files changed, 215 insertions(+), 15 deletions(-)
+ create mode 100644 Makefile
+
+diff --git a/Makefile b/Makefile
+new file mode 100644
+index 000000000000..ed26578f590f
+--- /dev/null
++++ b/Makefile
+@@ -0,0 +1,3 @@
++
++default:
++	cmake -S llvm -B build -G  Ninja -DLLVM_BINUTILS_INCDIR="/Users/nikitanazarov/Projects/binutils/include" -DLLVM_ENABLE_PROJECTS=lld -DLLVM_ENABLE_PROJECTS=clang -DCMAKE_BUILD_TYPE=Debug && ninja -C build/            	
+diff --git a/llvm/include/llvm/LTO/legacy/ThinLTOCodeGenerator.h b/llvm/include/llvm/LTO/legacy/ThinLTOCodeGenerator.h
+index 2df51829e5c8..997ba920eeeb 100644
+--- a/llvm/include/llvm/LTO/legacy/ThinLTOCodeGenerator.h
++++ b/llvm/include/llvm/LTO/legacy/ThinLTOCodeGenerator.h
+@@ -123,7 +123,7 @@ public:
+    */
+ 
+   struct CachingOptions {
+-    std::string Path;                    // Path to the cache, empty to disable.
++    std::string Path; // Path to the cache, empty to disable.
+     CachePruningPolicy Policy;
+   };
+ 
+@@ -135,7 +135,7 @@ public:
+   /// negative value to disable pruning. A value of 0 will force pruning to
+   /// occur.
+   void setCachePruningInterval(int Interval) {
+-    if(Interval < 0)
++    if (Interval < 0)
+       CacheOptions.Policy.Interval.reset();
+     else
+       CacheOptions.Policy.Interval = std::chrono::seconds(Interval);
+@@ -260,8 +260,7 @@ public:
+    * Compute and emit the imported files for module at \p ModulePath.
+    */
+   void emitImports(Module &Module, StringRef OutputName,
+-                   ModuleSummaryIndex &Index,
+-                   const lto::InputFile &File);
++                   ModuleSummaryIndex &Index, const lto::InputFile &File);
+ 
+   /**
+    * Perform cross-module importing for the module identified by
+@@ -288,6 +287,7 @@ public:
+    * Perform post-importing ThinLTO optimizations.
+    */
+   void optimize(Module &Module);
++  void optimize(Module &TheModule, ModuleSummaryIndex *Index);
+ 
+   /**
+    * Write temporary object file to SavedObjectDirectoryPath, write symlink
+@@ -298,7 +298,7 @@ public:
+                                    const MemoryBuffer &OutputBuffer);
+   /**@}*/
+ 
+-private:
++public:
+   /// Helper factory to build a TargetMachine
+   TargetMachineBuilder TMBuilder;
+ 
+@@ -331,7 +331,7 @@ private:
+ 
+   /// Flag to enable/disable CodeGen. When set to true, the process stops after
+   /// optimizations and a bitcode is produced.
+-  bool DisableCodeGen = false;
++  bool DisableCodeGen = true;
+ 
+   /// Flag to indicate that only the CodeGen will be performed, no cross-module
+   /// importing or optimization.
+diff --git a/llvm/lib/IR/Globals.cpp b/llvm/lib/IR/Globals.cpp
+index 275ac2591423..46a595a3ef8d 100644
+--- a/llvm/lib/IR/Globals.cpp
++++ b/llvm/lib/IR/Globals.cpp
+@@ -150,7 +150,7 @@ std::string GlobalValue::getGlobalIdentifier(StringRef Name,
+   // Value names may be prefixed with a binary '1' to indicate
+   // that the backend should not modify the symbols due to any platform
+   // naming convention. Do not include that '1' in the PGO profile name.
+-  if (Name[0] == '\1')
++  if (!Name.empty() && Name[0] == '\1')
+     Name = Name.substr(1);
+ 
+   std::string NewName = std::string(Name);
+diff --git a/llvm/lib/LTO/ThinLTOCodeGenerator.cpp b/llvm/lib/LTO/ThinLTOCodeGenerator.cpp
+index 5b137a8f8cb3..dcd20af7c787 100644
+--- a/llvm/lib/LTO/ThinLTOCodeGenerator.cpp
++++ b/llvm/lib/LTO/ThinLTOCodeGenerator.cpp
+@@ -60,6 +60,8 @@
+ #include "llvm/Transforms/ObjCARC.h"
+ #include "llvm/Transforms/Utils/FunctionImportUtils.h"
+ 
++#include <chrono>
++#include <fstream>
+ #include <numeric>
+ 
+ #if !defined(_MSC_VER) && !defined(__MINGW32__)
+@@ -441,6 +443,16 @@ public:
+   }
+ };
+ 
++void write_time_to_file(const std::string &FileName, int Time, const Module &TheModule) {
++    std::ofstream out;
++    out.open(FileName, std::ios_base::app);
++    auto name = TheModule.getName().str();
++    out << name.substr(name.rfind('/') + 1)
++        << " "
++        << Time
++        << std::endl;
++}
++
+ static std::unique_ptr<MemoryBuffer>
+ ProcessThinLTOModule(Module &TheModule, ModuleSummaryIndex &Index,
+                      StringMap<lto::InputFile *> &ModuleMap, TargetMachine &TM,
+@@ -468,37 +480,65 @@ ProcessThinLTOModule(Module &TheModule, ModuleSummaryIndex &Index,
+       TheModule.getPIELevel() == PIELevel::Default;
+ 
+   if (!SingleModule) {
+-    promoteModule(TheModule, Index, ClearDSOLocalOnDeclarations);
++    auto start = std::chrono::high_resolution_clock::now();
++    promoteModule(TheModule, Index, /*ClearDSOLocalOnDeclarations=*/false);
+ 
+     // Apply summary-based prevailing-symbol resolution decisions.
+     thinLTOFinalizeInModule(TheModule, DefinedGlobals, /*PropagateAttrs=*/true);
+ 
+     // Save temps: after promotion.
+     saveTempBitcode(TheModule, SaveTempsDir, count, ".1.promoted.bc");
++    auto end = std::chrono::high_resolution_clock::now();
++    write_time_to_file(
++      "chart/times1/promote.txt", 
++      std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count(), 
++      TheModule
++    );
+   }
+ 
+   // Be friendly and don't nuke totally the module when the client didn't
+   // supply anything to preserve.
+   if (!ExportList.empty() || !GUIDPreservedSymbols.empty()) {
+     // Apply summary-based internalization decisions.
++    auto start = std::chrono::high_resolution_clock::now();
+     thinLTOInternalizeModule(TheModule, DefinedGlobals);
++    auto end = std::chrono::high_resolution_clock::now();
++    write_time_to_file(
++      "chart/times1/internalise.txt", 
++      std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count(), 
++      TheModule
++    );
+   }
+ 
+   // Save internalized bitcode
+   saveTempBitcode(TheModule, SaveTempsDir, count, ".2.internalized.bc");
+ 
+   if (!SingleModule) {
++    auto start = std::chrono::high_resolution_clock::now();
+     crossImportIntoModule(TheModule, Index, ModuleMap, ImportList,
+                           ClearDSOLocalOnDeclarations);
+ 
+     // Save temps: after cross-module import.
+     saveTempBitcode(TheModule, SaveTempsDir, count, ".3.imported.bc");
++    auto end = std::chrono::high_resolution_clock::now();
++    write_time_to_file(
++      "chart/times1/import.txt", 
++      std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count(), 
++      TheModule
++    );
+   }
+ 
++  auto start = std::chrono::high_resolution_clock::now();
+   optimizeModule(TheModule, TM, OptLevel, Freestanding, DebugPassManager,
+                  &Index);
+ 
+   saveTempBitcode(TheModule, SaveTempsDir, count, ".4.opt.bc");
++  auto end = std::chrono::high_resolution_clock::now();
++  write_time_to_file(
++    "chart/times1/optimise.txt", 
++    std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count(), 
++    TheModule
++  );
+ 
+   if (DisableCodeGen) {
+     // Configured to stop before CodeGen, serialize the bitcode and return.
+@@ -903,13 +943,19 @@ void ThinLTOCodeGenerator::internalize(Module &TheModule,
+   // FIXME Set ClearDSOLocalOnDeclarations.
+   promoteModule(TheModule, Index, /*ClearDSOLocalOnDeclarations=*/false);
+ 
++  auto DefinedGlobals = ModuleToDefinedGVSummaries[ModuleIdentifier];
++
+   // Internalization
+   thinLTOFinalizeInModule(TheModule,
+                           ModuleToDefinedGVSummaries[ModuleIdentifier],
+                           /*PropagateAttrs=*/false);
+ 
++  // thinLTOFinalizeInModule(TheModule,
++  //                         DefinedGlobals,
++  //                         /*PropagateAttrs=*/true);
++
+   thinLTOInternalizeModule(TheModule,
+-                           ModuleToDefinedGVSummaries[ModuleIdentifier]);
++                           DefinedGlobals);
+ }
+ 
+ /**
+@@ -923,6 +969,17 @@ void ThinLTOCodeGenerator::optimize(Module &TheModule) {
+                  DebugPassManager, nullptr);
+ }
+ 
++void ThinLTOCodeGenerator::optimize(Module &TheModule, ModuleSummaryIndex *Index) {
++  initTMBuilder(TMBuilder, Triple(TheModule.getTargetTriple()));
++
++  if (!Index)
++    return;
++
++  // Optimize now
++  optimizeModule(TheModule, *TMBuilder.create(), OptLevel, Freestanding,
++                 DebugPassManager, Index);
++}
++
+ /// Write out the generated object file, either from CacheEntryPath or from
+ /// OutputBuffer, preferring hard-link when possible.
+ /// Returns the path to the generated file in SavedObjectsDirectoryPath.
+@@ -1011,6 +1068,8 @@ void ThinLTOCodeGenerator::run() {
+   // Sequential linking phase
+   auto Index = linkCombinedIndex();
+ 
++  SaveTempsDir = "llvm-lto-tmp/";
++
+   // Save temps: index.
+   if (!SaveTempsDir.empty()) {
+     auto SaveTempPath = SaveTempsDir + "index.bc";
+diff --git a/llvm/lib/Transforms/IPO/FunctionImport.cpp b/llvm/lib/Transforms/IPO/FunctionImport.cpp
+index 7c994657e5c8..b0c204d0637b 100644
+--- a/llvm/lib/Transforms/IPO/FunctionImport.cpp
++++ b/llvm/lib/Transforms/IPO/FunctionImport.cpp
+@@ -848,6 +848,8 @@ void llvm::computeDeadSymbolsAndUpdateIndirectCalls(
+     ModuleSummaryIndex &Index,
+     const DenseSet<GlobalValue::GUID> &GUIDPreservedSymbols,
+     function_ref<PrevailingType(GlobalValue::GUID)> isPrevailing) {
++  if (Index.withGlobalValueDeadStripping())
++    return;
+   assert(!Index.withGlobalValueDeadStripping());
+   if (!ComputeDead ||
+       // Don't do anything when nothing is live, this is friendly with tests.
+@@ -1211,7 +1213,8 @@ void llvm::thinLTOInternalizeModule(Module &TheModule,
+         // recorded in the index using the original name.
+         // FIXME: This may not be needed once PR27866 is fixed.
+         GS = DefinedGlobals.find(GlobalValue::getGUID(OrigName));
+-        assert(GS != DefinedGlobals.end());
++        return true;
++        // assert(GS != DefinedGlobals.end());
+       }
+     }
+     return !GlobalValue::isLocalLinkage(GS->second->linkage());
+diff --git a/llvm/lib/Transforms/Utils/FunctionImportUtils.cpp b/llvm/lib/Transforms/Utils/FunctionImportUtils.cpp
+index 87be6be01885..5e5ac90c3a76 100644
+--- a/llvm/lib/Transforms/Utils/FunctionImportUtils.cpp
++++ b/llvm/lib/Transforms/Utils/FunctionImportUtils.cpp
+@@ -220,7 +220,7 @@ FunctionImportGlobalProcessing::getLinkage(const GlobalValue *SGV,
+ void FunctionImportGlobalProcessing::processGlobalForThinLTO(GlobalValue &GV) {
+ 
+   ValueInfo VI;
+-  if (GV.hasName()) {
++  // if (GV.hasName()) {
+     VI = ImportIndex.getValueInfo(GV.getGUID());
+     // Set synthetic function entry counts.
+     if (VI && ImportIndex.hasSyntheticEntryCounts()) {
+@@ -237,12 +237,12 @@ void FunctionImportGlobalProcessing::processGlobalForThinLTO(GlobalValue &GV) {
+         }
+       }
+     }
+-  }
++  // }
+ 
+   // We should always have a ValueInfo (i.e. GV in index) for definitions when
+   // we are exporting, and also when importing that value.
+-  assert(VI || GV.isDeclaration() ||
+-         (isPerformingImport() && !doImportAsDefinition(&GV)));
++  // assert(VI || GV.isDeclaration() ||
++  //        (isPerformingImport() && !doImportAsDefinition(&GV)));
+ 
+   // Mark read/write-only variables which can be imported with specific
+   // attribute. We can't internalize them now because IRMover will fail
+diff --git a/llvm/tools/llvm-lto/llvm-lto.cpp b/llvm/tools/llvm-lto/llvm-lto.cpp
+index 79e9d93061a2..343711481dd8 100644
+--- a/llvm/tools/llvm-lto/llvm-lto.cpp
++++ b/llvm/tools/llvm-lto/llvm-lto.cpp
+@@ -48,6 +48,7 @@
+ #include "llvm/Support/raw_ostream.h"
+ #include "llvm/Support/WithColor.h"
+ #include "llvm/Target/TargetOptions.h"
++#include "llvm/Transforms/IPO/WholeProgramDevirt.h"
+ #include <algorithm>
+ #include <cassert>
+ #include <cstdint>
+@@ -591,6 +592,36 @@ static void writeModuleToFile(Module &TheModule, StringRef Filename) {
+   WriteBitcodeToFile(TheModule, OS, /* ShouldPreserveUseListOrder */ true);
+ }
+ 
++struct IsExported {
++  const StringMap<FunctionImporter::ExportSetTy> &ExportLists;
++  const DenseSet<GlobalValue::GUID> &GUIDPreservedSymbols;
++
++  IsExported(const StringMap<FunctionImporter::ExportSetTy> &ExportLists,
++             const DenseSet<GlobalValue::GUID> &GUIDPreservedSymbols)
++      : ExportLists(ExportLists), GUIDPreservedSymbols(GUIDPreservedSymbols) {}
++
++  bool operator()(StringRef ModuleIdentifier, ValueInfo VI) const {
++    const auto &ExportList = ExportLists.find(ModuleIdentifier);
++    return (ExportList != ExportLists.end() && ExportList->second.count(VI)) ||
++           GUIDPreservedSymbols.count(VI.getGUID());
++  }
++};
++
++struct IsPrevailing {
++  const DenseMap<GlobalValue::GUID, const GlobalValueSummary *> &PrevailingCopy;
++  IsPrevailing(const DenseMap<GlobalValue::GUID, const GlobalValueSummary *>
++                   &PrevailingCopy)
++      : PrevailingCopy(PrevailingCopy) {}
++
++  bool operator()(GlobalValue::GUID GUID, const GlobalValueSummary *S) const {
++    const auto &Prevailing = PrevailingCopy.find(GUID);
++    // Not in map means that there was only one copy, which must be prevailing.
++    if (Prevailing == PrevailingCopy.end())
++      return true;
++    return Prevailing->second == S;
++  };
++};
++
+ class ThinLTOProcessing {
+ public:
+   ThinLTOCodeGenerator ThinGenerator;
+@@ -635,6 +666,67 @@ public:
+   }
+ 
+ private:
++  static void
++  addUsedSymbolToPreservedGUID(const lto::InputFile &File,
++                              DenseSet<GlobalValue::GUID> &PreservedGUID) {
++    for (const auto &Sym : File.symbols()) {
++      if (Sym.isUsed())
++        PreservedGUID.insert(GlobalValue::getGUID(Sym.getIRName()));
++    }
++  }
++
++  // Convert the PreservedSymbols map from "Name" based to "GUID" based.
++  static void computeGUIDPreservedSymbols(const lto::InputFile &File,
++                                          const StringSet<> &PreservedSymbols,
++                                          const Triple &TheTriple,
++                                          DenseSet<GlobalValue::GUID> &GUIDs) {
++    // Iterate the symbols in the input file and if the input has preserved symbol
++    // compute the GUID for the symbol.
++    for (const auto &Sym : File.symbols()) {
++      if (PreservedSymbols.count(Sym.getName()) && !Sym.getIRName().empty())
++        GUIDs.insert(GlobalValue::getGUID(GlobalValue::getGlobalIdentifier(
++            Sym.getIRName(), GlobalValue::ExternalLinkage, "")));
++    }
++  }
++
++  static const GlobalValueSummary *
++  getFirstDefinitionForLinker(const GlobalValueSummaryList &GVSummaryList) {
++    // If there is any strong definition anywhere, get it.
++    auto StrongDefForLinker = llvm::find_if(
++        GVSummaryList, [](const std::unique_ptr<GlobalValueSummary> &Summary) {
++          auto Linkage = Summary->linkage();
++          return !GlobalValue::isAvailableExternallyLinkage(Linkage) &&
++                !GlobalValue::isWeakForLinker(Linkage);
++        });
++    if (StrongDefForLinker != GVSummaryList.end())
++      return StrongDefForLinker->get();
++    // Get the first *linker visible* definition for this global in the summary
++    // list.
++    auto FirstDefForLinker = llvm::find_if(
++        GVSummaryList, [](const std::unique_ptr<GlobalValueSummary> &Summary) {
++          auto Linkage = Summary->linkage();
++          return !GlobalValue::isAvailableExternallyLinkage(Linkage);
++        });
++    // Extern templates can be emitted as available_externally.
++    if (FirstDefForLinker == GVSummaryList.end())
++      return nullptr;
++    return FirstDefForLinker->get();
++  }
++
++  static void computePrevailingCopies(
++      const ModuleSummaryIndex &Index,
++      DenseMap<GlobalValue::GUID, const GlobalValueSummary *> &PrevailingCopy) {
++    auto HasMultipleCopies = [&](const GlobalValueSummaryList &GVSummaryList) {
++      return GVSummaryList.size() > 1;
++    };
++
++    for (auto &I : Index) {
++      if (HasMultipleCopies(I.second.SummaryList))
++        PrevailingCopy[I.first] =
++            getFirstDefinitionForLinker(I.second.SummaryList);
++    }
++  }
++
+   /// Load the input files, create the combined index, and write it out.
+   void thinLink() {
+     // Perform "ThinLink": just produce the index
+@@ -656,6 +748,48 @@ private:
+     auto CombinedIndex = ThinGenerator.linkCombinedIndex();
+     if (!CombinedIndex)
+       report_fatal_error("ThinLink didn't create an index");
++
++    // if (hasWholeProgramVisibility(/* WholeProgramVisibilityEnabledInLTO */ false))
++    //   CombinedIndex->setWithWholeProgramVisibility();
++    // updateVCallVisibilityInIndex(*CombinedIndex,
++    //                             /* WholeProgramVisibilityEnabledInLTO */ false,
++    //                             // FIXME: This needs linker information via a
++    //                             // TBD new interface.
++    //                             /* DynamicExportSymbols */ {});
++
++    // auto ModuleCount = ThinGenerator.Modules.size();
++    // StringMap<GVSummaryMapTy> ModuleToDefinedGVSummaries(ModuleCount);
++    // CombinedIndex->collectDefinedGVSummariesPerModule(ModuleToDefinedGVSummaries);
++
++    // StringMap<FunctionImporter::ImportMapTy> ImportLists(ModuleCount);
++    // StringMap<FunctionImporter::ExportSetTy> ExportLists(ModuleCount);
++    // ComputeCrossModuleImport(*CombinedIndex, ModuleToDefinedGVSummaries, ImportLists, ExportLists);
++
++    // DenseMap<GlobalValue::GUID, const GlobalValueSummary *> PrevailingCopy;
++    // computePrevailingCopies(*CombinedIndex, PrevailingCopy);
++
++    // DenseSet<GlobalValue::GUID> GUIDPreservedSymbols;
++    // for (const auto &M : ThinGenerator.Modules)
++    //   computeGUIDPreservedSymbols(*M, ThinGenerator.PreservedSymbols, ThinGenerator.TMBuilder.TheTriple,
++    //                               GUIDPreservedSymbols);
++
++    // // Add used symbol from inputs to the preserved symbols.
++    // for (const auto &M : ThinGenerator.Modules)
++    //   addUsedSymbolToPreservedGUID(*M, GUIDPreservedSymbols);
++
++    // std::map<ValueInfo, std::vector<VTableSlotSummary>> LocalWPDTargetsMap;
++    // std::set<GlobalValue::GUID> ExportedGUIDs;
++    // runWholeProgramDevirtOnIndex(*CombinedIndex, ExportedGUIDs, LocalWPDTargetsMap);
++    // for (auto GUID : ExportedGUIDs)
++    //   GUIDPreservedSymbols.insert(GUID);
++
++    // updateIndexWPDForExports(*CombinedIndex,
++    //                     IsExported(ExportLists, GUIDPreservedSymbols),
++    //                     LocalWPDTargetsMap);
++    // thinLTOInternalizeAndPromoteInIndex(
++    //     *CombinedIndex, IsExported(ExportLists, GUIDPreservedSymbols),
++    //     IsPrevailing(PrevailingCopy));
++
+     std::error_code EC;
+     raw_fd_ostream OS(OutputFilename, EC, sys::fs::OpenFlags::OF_None);
+     error(EC, "error opening the file '" + OutputFilename + "'");
+@@ -832,13 +966,14 @@ private:
+     if (!ThinLTOIndex.empty())
+       errs() << "Warning: -thinlto-index ignored for optimize stage";
+ 
++    auto Index = loadCombinedIndex().release();
+     for (auto &Filename : InputFilenames) {
+       LLVMContext Ctx;
+       auto Buffer = loadFile(Filename);
+       auto Input = loadInputFile(Buffer->getMemBufferRef());
+       auto TheModule = loadModuleFromInput(*Input, Ctx);
+ 
+-      ThinGenerator.optimize(*TheModule);
++      ThinGenerator.optimize(*TheModule, Index);
+ 
+       std::string OutputName = OutputFilename;
+       if (OutputName.empty()) {
+-- 
+2.40.0.rc1.284.g88254d51c5-goog
+

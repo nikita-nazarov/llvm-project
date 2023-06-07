@@ -63,6 +63,7 @@
 #include <chrono>
 #include <fstream>
 #include <numeric>
+#include <iostream>
 
 #if !defined(_MSC_VER) && !defined(__MINGW32__)
 #include <unistd.h>

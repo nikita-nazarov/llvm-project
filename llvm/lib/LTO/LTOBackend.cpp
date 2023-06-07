@@ -46,6 +46,7 @@
 #include "llvm/Transforms/Utils/FunctionImportUtils.h"
 #include "llvm/Transforms/Utils/SplitModule.h"
 #include <optional>
+#include <iostream>
 
 using namespace llvm;
 using namespace lto;
@@ -366,12 +367,13 @@ static void codegen(const Config &Conf, TargetMachine *TM,
   if (Conf.PreCodeGenModuleHook && !Conf.PreCodeGenModuleHook(Task, Mod))
     return;
 
-  if (EmbedBitcode == LTOBitcodeEmbedding::EmbedOptimized)
-    llvm::embedBitcodeInModule(Mod, llvm::MemoryBufferRef(),
-                               /*EmbedBitcode*/ true,
-                               /*EmbedCmdline*/ false,
-                               /*CmdArgs*/ std::vector<uint8_t>());
-
+  if (EmbedBitcode == LTOBitcodeEmbedding::EmbedOptimized) {
+	  std::cout << "EMBEDDING BITCODE" << std::endl;
+	  llvm::embedBitcodeInModule(Mod, llvm::MemoryBufferRef(),
+			  /*EmbedBitcode*/ true,
+			  /*EmbedCmdline*/ false,
+			  /*CmdArgs*/ std::vector<uint8_t>());
+  }
   std::unique_ptr<ToolOutputFile> DwoOut;
   SmallString<1024> DwoFile(Conf.SplitDwarfOutput);
   if (!Conf.DwoDir.empty()) {
@@ -546,6 +548,7 @@ Error lto::thinBackend(const Config &Conf, unsigned Task, AddStreamFn AddStream,
                        const GVSummaryMapTy &DefinedGlobals,
                        MapVector<StringRef, BitcodeModule> *ModuleMap,
                        const std::vector<uint8_t> &CmdArgs) {
+	std::cout << "RUNNING THIN BACKEND" << std::endl;
   Expected<const Target *> TOrErr = initAndLookupTarget(Conf, Mod);
   if (!TOrErr)
     return TOrErr.takeError();
@@ -568,16 +571,20 @@ Error lto::thinBackend(const Config &Conf, unsigned Task, AddStreamFn AddStream,
   updatePublicTypeTestCalls(Mod, CombinedIndex.withWholeProgramVisibility());
 
   if (Conf.CodeGenOnly) {
+	  std::cout << "CODEGEN ONLY" << std::endl;
     codegen(Conf, TM.get(), AddStream, Task, Mod, CombinedIndex);
     return finalizeOptimizationRemarks(std::move(DiagnosticOutputFile));
   }
 
-  if (Conf.PreOptModuleHook && !Conf.PreOptModuleHook(Task, Mod))
+  if (Conf.PreOptModuleHook && !Conf.PreOptModuleHook(Task, Mod)) {
+	  std::cout << "EXITING HERE" << std::endl;
     return finalizeOptimizationRemarks(std::move(DiagnosticOutputFile));
+  }
 
   auto OptimizeAndCodegen =
       [&](Module &Mod, TargetMachine *TM,
           std::unique_ptr<ToolOutputFile> DiagnosticOutputFile) {
+		  std::cout << "OPTIMIZING AND GENERATING CODE" << std::endl;
         if (!opt(Conf, TM, Task, Mod, /*IsThinLTO=*/true,
                  /*ExportSummary=*/nullptr, /*ImportSummary=*/&CombinedIndex,
                  CmdArgs))
@@ -587,8 +594,10 @@ Error lto::thinBackend(const Config &Conf, unsigned Task, AddStreamFn AddStream,
         return finalizeOptimizationRemarks(std::move(DiagnosticOutputFile));
       };
 
-  if (ThinLTOAssumeMerged)
+  if (ThinLTOAssumeMerged) {
+	  std::cout << "ASSUME MERGED" << std::endl;
     return OptimizeAndCodegen(Mod, TM.get(), std::move(DiagnosticOutputFile));
+  }
 
   // When linking an ELF shared object, dso_local should be dropped. We
   // conservatively do this for -fpic.

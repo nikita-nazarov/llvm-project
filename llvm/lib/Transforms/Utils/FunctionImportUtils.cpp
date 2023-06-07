@@ -13,6 +13,8 @@
 
 #include "llvm/Transforms/Utils/FunctionImportUtils.h"
 #include "llvm/Support/CommandLine.h"
+#include <iostream>
+
 using namespace llvm;
 
 /// Uses the "source_filename" instead of a Module hash ID for the suffix of
@@ -58,14 +60,22 @@ bool FunctionImportGlobalProcessing::shouldPromoteLocalToGlobal(
     return false;
 
   if (isPerformingImport()) {
-    assert((!GlobalsToImport->count(const_cast<GlobalValue *>(SGV)) ||
-            !isNonRenamableLocal(*SGV)) &&
-           "Attempting to promote non-renamable local");
+	//std::cout << "Name: " << SGV->getName().str() << std::endl;
+	//std::cout << "Used: " << Used.count(const_cast<GlobalValue *>(SGV)) << std::endl;
+	//std::cout << "Has section: " << SGV->hasSection() << std::endl;
+	//std::cout << "Section: " << SGV->getSection().str() << std::endl;
+    //assert((!GlobalsToImport->count(const_cast<GlobalValue *>(SGV)) ||
+    //        !isNonRenamableLocal(*SGV)) &&
+    //       "Attempting to promote non-renamable local");
     // We don't know for sure yet if we are importing this value (as either
     // a reference or a def), since we are simply walking all values in the
     // module. But by necessity if we end up importing it and it is local,
     // it must be promoted, so unconditionally promote all values in the
     // importing module.
+	if (GlobalsToImport->count(const_cast<GlobalValue *>(SGV)) && isNonRenamableLocal(*SGV)) {
+		std::cout << "Didn't promote: " << SGV->getName().str() << std::endl;
+		return false;
+	}
     return true;
   }
 
@@ -166,7 +176,10 @@ FunctionImportGlobalProcessing::getLinkage(const GlobalValue *SGV,
     // linkonce_any/weak_any definition and importing would change the order
     // they are seen by the linker. The module linking caller needs to enforce
     // this.
-    assert(!doImportAsDefinition(SGV));
+	std::cout  << "WEAK LINKAGE: " << SGV->getName().str() << std::endl;
+	if (doImportAsDefinition(SGV))
+		std::cout << "ERROR IN VALUE: " << SGV->getName().str() << std::endl;
+    // assert(!doImportAsDefinition(SGV));
     // If imported as a declaration, it becomes external_weak.
     return SGV->getLinkage();
 
